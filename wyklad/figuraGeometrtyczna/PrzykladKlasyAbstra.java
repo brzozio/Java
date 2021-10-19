@@ -12,5 +12,9 @@ public class PrzykladKlasyAbstra {
             }
         };
         System.out.println(figura.obwod());
+
+        MaPolePowierzchni figura1 = new Kwadrat(); // tworzymy obiekt z klasy kwadrat poprzez interfejs MaPolePowierzchni
+        
+
     }
 }
