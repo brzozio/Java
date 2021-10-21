@@ -1,6 +1,9 @@
+// Zasady gry
+import java.util.Arrays;
 
 public class Connect4{
 	Tablice tablica = new Tablice(); // konstruktor bezparametrowy
+
 	Tablice tablica2 = new Tablice(5,7); // konstruktor z dwoma argumentami
 	
 	/* ----- ZASADY GRY --------
@@ -26,6 +29,18 @@ public class Connect4{
 		//}
 		
 		
+	}
+	public void wyswietlajTablice(){
+		for(int o = 0; o < 5; o++){
+		for(int j = 0; j < 7; j++){
+			tablica[i][j] = 0;
+		}
+	}
+	for(int i = 0; i < 5; i++){
+		for(int j = 0; j < 7; j++){
+			System.out.println();
+		}
+	}
 	}
 	
 	
