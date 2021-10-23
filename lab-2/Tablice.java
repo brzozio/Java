@@ -5,12 +5,13 @@ import java.text.BreakIterator;
 public class Tablice {
 	public int iloscWierszy;
 	public int iloscKolumn;
-	public static int[][] tablica; // ewentualnie dodac ilosc elementow
+	public static int[][] planszaGry; // ewentualnie dodac ilosc elementow
 
 	// ====================== KONSTRUKTORY ===================
 	public Tablice() { // konstruktor bezparametrowy
-		this.iloscWierszy = 5;
+		this.iloscWierszy = 6;
 		this.iloscKolumn = 7;
+		planszaGry[this.iloscWierszy][this.iloscKolumn];
 	}
 	
 	public Tablice(int iloscWierszyPrzekazywana, int iloscKolumnPrzekazywana) {
@@ -25,7 +26,7 @@ public class Tablice {
 	public static boolean czyPelna(int[] tablicaGra) {
 		iloscZerowychElementow = 0;
 		for(int i = 0; i < 7; i++) {
-			if(!czyPelnaKolumna(tablica, i)){
+			if(!czyPelnaKolumna(planszaGry, i)){
 				iloscZerowychElementow += 1;
 			}
 		}
@@ -38,7 +39,7 @@ public class Tablice {
 	
 	public static boolean czyPelnaKolumna(int[][] tablicaGra, int nrKolumny) {
 		iloscZerowychElementow = 0;
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 6; i++) {
 			if(tablicaGra[i][nrKolumny] == 0) {
 				iloscZerowychElementow = iloscZerowychElementow + 1;
 			}
