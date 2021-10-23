@@ -21,7 +21,7 @@ public class Connect4{
 			} else return 1;
 		}
 	
-	public boolean wrzucKrazek(int kolumna) {
+	//public boolean wrzucKrazek(int kolumna) {
 		//tablica[0][kolumna] == 0; // dodawanie krazka danego gracza
 		//czyjaKolej(); // zmiana kolejki na innego gracza
 		//if(czyPelnaKolumna(tablica, kolumna) == true) {
@@ -29,11 +29,11 @@ public class Connect4{
 		//}
 		
 		
-	}
+	//}
 	public void wyswietlajTablice(){
 		for(int o = 0; o < 6; o++){
 		for(int j = 0; j < 7; j++){
-			tablica[i][j] = 0;
+			//tablica[i][j] = 0;
 		}
 	}
 	for(int i = 0; i < 6; i++){

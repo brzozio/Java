@@ -11,7 +11,7 @@ public class Tablice {
 	public Tablice() { // konstruktor bezparametrowy
 		this.iloscWierszy = 6;
 		this.iloscKolumn = 7;
-		planszaGry[this.iloscWierszy][this.iloscKolumn];
+	//	planszaGry[this.iloscWierszy][this.iloscKolumn];
 	}
 	
 	public Tablice(int iloscWierszyPrzekazywana, int iloscKolumnPrzekazywana) {
