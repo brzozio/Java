@@ -1,5 +1,6 @@
 // Zasady gry
 import java.util.Arrays;
+import java.util.Random;
 
 public class Connect4{
 	//Tablice tablica[][] = new Tablice[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana]; // konstruktor bezparametrowy
@@ -15,12 +16,13 @@ public class Connect4{
 			}
 
 	public void wyswietlajTablice(){
-		//System.out.println(tablica.planszaGry[1][1]);
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 7; j++){
-				System.out.println(tablica.planszaGry[i][j]);
+				System.out.printf(tablica.planszaGry[i][j] + " ");
 			}
+			System.out.println("\n");
 		}
+		//System.out.println(Arrays.asList(tablica));
 	}
 	
 	//Tablice tablica3 = new Tablice(6,7);
@@ -32,23 +34,43 @@ public class Connect4{
 	 * zaczyna gracz Gracz1 zawsze jako pierwszy
 	 * 
 	 */
-	public int lastKolej;
+	public int kolej = 0;
 		public int czyjaKolej() {
-			if(lastKolej == 1) {
+			if(kolej == 0){
+				Random randomNumber = new Random();
+					int zmiennaRandomKolej = randomNumber.nextInt(2);
+				kolej = zmiennaRandomKolej;
+			}
+			if(kolej == 1) {
+				kolej = 2;
 				return 2;
-			} else return 1;
+			} else {
+				kolej = 1;
+				return 1;
+			}
 		}
 	
 	public boolean wrzucKrazek(int kolumna) {
-		if(tablica.planszaGry[0][kolumna] == 0){
-			
-		} // dodawanie krazka danego gracza
-		czyjaKolej(); // zmiana kolejki na innego gracza
-		if(czyPelnaKolumna(tablica, kolumna) == true) {
-			
-		}
-		
+		int checkFull = 0;
+		if(tablica.planszaGry[0][kolumna] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
+				// sprawdzamy wolne miejsca od dolu
+			if(tablica.planszaGry[5][kolumna] == 0){
+				tablica.planszaGry[5][kolumna] = kolej;
+			} else if(tablica.planszaGry[4][kolumna] == 0){
+				tablica.planszaGry[4][kolumna] = kolej;
+			} else if(tablica.planszaGry[3][kolumna] == 0){
+				tablica.planszaGry[3][kolumna] = kolej;
+			} else if(tablica.planszaGry[2][kolumna] == 0){
+				tablica.planszaGry[2][kolumna] = kolej;
+			} else if(tablica.planszaGry[1][kolumna] == 0){
+				tablica.planszaGry[1][kolumna] = kolej;
+			} else if(tablica.planszaGry[0][kolumna] == 0){
+				tablica.planszaGry[0][kolumna] = kolej;
+			} 
+		}else checkFull++;
+		if(checkFull == 0){
+			return true;
+		}else return false;
 		
 	}
-	
 }
