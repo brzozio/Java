@@ -77,16 +77,15 @@ public class Connect4{
 		}else return false;
 		
 	}
-/*
-	public String ktoWygral(){
-		if(tablica.najdluzszyCiag(tablica.planszaGry) == "4x1"){
-			return "\nWygral gracz numer 1";
-		}else return "\nWygral gracz numer 2";
 
+	public void ktoWygral(){
+		int ciong = Tablice.najdluzszyCiag(tablica.planszaGry);
+		System.out.println("Najdluzszy ciag to: " + ciong);
 	}
 
+	/*
 	public String tablicaJakoString(){
 		
-	}
-*/
+	}*/
+
 }

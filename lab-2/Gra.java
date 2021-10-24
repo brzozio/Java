@@ -32,6 +32,7 @@ public class Gra {
 			//gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
 			gra.wyswietlajTablice(); // wyswietlanie tablicy po kazdej rundzie
 			gra.czyjaKolej(); // przekazywanie kolejki do kolejnego gracza
+			gra.ktoWygral();
 		}
 	}
 }

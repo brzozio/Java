@@ -72,64 +72,62 @@ public class Tablice {
 	
 	public static int najdluzszyCiag(int[][] tablicaGra) {
 		// pion, poziom, skos w obie strony
-		int dlugoscCiagu = 0; 
+		int dlugoscCiagu = 1; 
 		int dlugoscCiaguMax = 0;
-		int countWiersze = 6; 
-		int countKolumny = 7;
-
+		int countWiersze = 6; // 6 - 1 bo start od 0
+		int countKolumny = 7; // 7 - 1 bo start od 0
+/*
 		// sprawdzanie poziomu -- countWiersze musi byc takie samo, inaczej zerowanie
-		for(int i = 0; i < countWiersze; i++){
-			for(int j = 3; j < countKolumny; j++){
-				if(tablicaGra[i][j] == tablicaGra[i][j-1]){
-					dlugoscCiagu = 2;
-					if(tablicaGra[i][j-1] == tablicaGra[i][j-2]){
-						dlugoscCiagu = 3;
-						if(tablicaGra[i][j-2] == tablicaGra[i][j-3]){
-							dlugoscCiagu = 4;
-						}
+			for(int i = 1; i < countWiersze; i++){
+				dlugoscCiagu = 1;
+				for(int j = 0; j < countKolumny; j++){
+					if(tablicaGra[i][j] == tablicaGra[i-1][j]){
+						dlugoscCiagu++;
 					}
-				}else dlugoscCiagu = 1;
+				}
 			}
 			if(dlugoscCiagu > dlugoscCiaguMax){
 				dlugoscCiaguMax = dlugoscCiagu;
 			}
-		}
-
 		// sprawdzanie pionu 
-		for(int j = 0; j < countKolumny; j++){
-			for(int i = 3; i < countWiersze; i++){
-				if(tablicaGra[i][j] == tablicaGra[i][j-1]){
-					dlugoscCiagu = 2;
-					if(tablicaGra[i][j-1] == tablicaGra[i][j-2]){
-						dlugoscCiagu = 3;
-						if(tablicaGra[i][j-2] == tablicaGra[i][j-3]){
-							dlugoscCiagu = 4;
-						}
+			for(int j = 0; j < countKolumny; j++){
+				dlugoscCiagu = 1;
+				for(int i = 3; i < countWiersze; i++){
+					if(tablicaGra[i][j] == tablicaGra[i-1][j]){
+						dlugoscCiagu++;
 					}
-				}else dlugoscCiagu = 1;
+				}
 			}
 			if(dlugoscCiagu > dlugoscCiaguMax){
 				dlugoscCiaguMax = dlugoscCiagu;
 			}
-		}
 		
+*/		
 		// sprawdzanie skosu
-		for(int i = 0; i < countWiersze; i++){
-			for(int j = 3; j < countKolumny; j++){
-				if(tablicaGra[i][j] == tablicaGra[i][j-1]){
-					dlugoscCiagu = 2;
-					if(tablicaGra[i][j-1] == tablicaGra[i][j-2]){
-						dlugoscCiagu = 3;
-						if(tablicaGra[i][j-2] == tablicaGra[i][j-3]){
-							dlugoscCiagu = 4;
+			// od TOP_RIGTH do DOWN_LEFT, kolumny 3-6
+				int j4 = countKolumny - 2; // zaczynamy od 5 kolumny a konczymy na 3
+				int i4 = 1; // zaczybnamy od 1 wiersza a konczymy na 6
+				int kolumnyDiag4;
+			while(j4 >= 3){
+				i4 = 1;
+				kolumnyDiag4 = j4;
+				dlugoscCiagu = 0;
+
+				while(kolumnyDiag4 > 0){
+					if(tablicaGra[i4][kolumnyDiag4] == tablicaGra[i4-1][kolumnyDiag4+1]){
+						dlugoscCiagu++;
+						if(dlugoscCiagu > dlugoscCiaguMax){
+							dlugoscCiaguMax = dlugoscCiagu;
 						}
-					}
-				}else dlugoscCiagu = 1;
+					}else dlugoscCiagu = 1;
+					i4++; kolumnyDiag4--;;// sprawdzanie kolejnej komorki po skosie
+				}
+				j4 = j4 - 1; // przechodzenie
 			}
 			if(dlugoscCiagu > dlugoscCiaguMax){
 				dlugoscCiaguMax = dlugoscCiagu;
 			}
-		}
+
 		return dlugoscCiaguMax;
 	}
 }
