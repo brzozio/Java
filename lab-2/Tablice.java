@@ -111,7 +111,7 @@ public class Tablice {
 			while(j4 >= 3){
 				i4 = 1;
 				kolumnyDiag4 = j4;
-				dlugoscCiagu = 0;
+				dlugoscCiagu = 1;
 
 				while(kolumnyDiag4 > 0){
 					if(tablicaGra[i4][kolumnyDiag4] == tablicaGra[i4-1][kolumnyDiag4+1]){
