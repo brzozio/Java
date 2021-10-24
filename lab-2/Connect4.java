@@ -6,6 +6,9 @@ public class Connect4{
 	//Tablice tablica[][] = new Tablice[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana]; // konstruktor bezparametrowy
 	public Tablice tablica = new Tablice();
 	public Tablice tablicaParametryTablice = new Tablice(6,7); // konstruktor z dwoma argumentami
+	
+	//public Tablice tablica2 = new Tablice();
+	//public Tablice[][] tablicaDwaParametry = new Tablice[6][7];
 			public void zerujTablice(){
 				//System.out.println(tablica.planszaGry[1][1]);
 				for(int i = 0; i < 6; i++){
@@ -74,12 +77,16 @@ public class Connect4{
 		}else return false;
 		
 	}
-
-	public int ktoWygral(){
+/*
+	public String ktoWygral(){
+		if(tablica.najdluzszyCiag(tablica.planszaGry) == "4x1"){
+			return "\nWygral gracz numer 1";
+		}else return "\nWygral gracz numer 2";
 
 	}
 
 	public String tablicaJakoString(){
 		
 	}
+*/
 }

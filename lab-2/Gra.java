@@ -9,21 +9,29 @@ public class Gra {
 
 		// URUCHOMIENIE GFY
 		System.out.println("Witaj w Connect4");	
+			Scanner scan = new Scanner(System.in);
 
 		while(true){
 			if(gra.kolej == 0){
 				gra.czyjaKolej();
 			}
-			Scanner scan = new Scanner(System.in);
 			System.out.println("\n\nPodaj numer kolumny"); 
 				int graKolumna = scan.nextInt(); // skaner linii
+				while(graKolumna > 7){ // error jesli kolumna > 7
+					System.out.println("\nError\nTwoja kolumna musi byc w zakresie <1,7>");
+					graKolumna = scan.nextInt(); // skaner linii
+				}
 				System.out.println("\nTwoja kolumna to: " + graKolumna);
-			gra.wrzucKrazek(graKolumna - 1); // -1 bo zaczynamy iteracje od 0
-			gra.wyswietlajTablice();
-			gra.czyjaKolej();
-			scan.close(); // zamykanie skanera
+			if(gra.wrzucKrazek(graKolumna -1) == false){
+				System.out.println("Dana kolumna jest pelna!");
+				System.out.println("\nPodaj inna kolumne");
+				graKolumna = scan.nextInt(); // skaner linii
+				gra.wrzucKrazek(graKolumna - 1);
+			}
+			 // -1 bo zaczynamy iteracje od 0
+			//gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
+			gra.wyswietlajTablice(); // wyswietlanie tablicy po kazdej rundzie
+			gra.czyjaKolej(); // przekazywanie kolejki do kolejnego gracza
 		}
-
-		//boolean pelnaKolumna = Tablice.czyPelnaKolumna(gra.tablica.planszaGry, 2);
 	}
 }

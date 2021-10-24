@@ -37,9 +37,9 @@ public class Tablice {
 	public static boolean czyPelna(int[] tablicaGra) {
 		iloscZerowychElementow = 0;
 		for(int i = 0; i < 7; i++) {
-		//	if(!czyPelnaKolumna(tablicaGra, i)){
+			/*if(!czyPelnaKolumna(tablicaGra, i)){
 				iloscZerowychElementow += 1;
-			//}
+			}*/
 		}
 		if(iloscZerowychElementow > 0) {
 			return false;
@@ -67,10 +67,69 @@ public class Tablice {
 	}
 	
 	public static void clone(int[][] tablicaGra) {
-		
+		//deepCopy
 	}
 	
-	public static void najdluzszyCiag(int[][] tablicaGra, int x) {
+	public static int najdluzszyCiag(int[][] tablicaGra) {
+		// pion, poziom, skos w obie strony
+		int dlugoscCiagu = 0; 
+		int dlugoscCiaguMax = 0;
+		int countWiersze = 6; 
+		int countKolumny = 7;
+
+		// sprawdzanie poziomu -- countWiersze musi byc takie samo, inaczej zerowanie
+		for(int i = 0; i < countWiersze; i++){
+			for(int j = 3; j < countKolumny; j++){
+				if(tablicaGra[i][j] == tablicaGra[i][j-1]){
+					dlugoscCiagu = 2;
+					if(tablicaGra[i][j-1] == tablicaGra[i][j-2]){
+						dlugoscCiagu = 3;
+						if(tablicaGra[i][j-2] == tablicaGra[i][j-3]){
+							dlugoscCiagu = 4;
+						}
+					}
+				}else dlugoscCiagu = 1;
+			}
+			if(dlugoscCiagu > dlugoscCiaguMax){
+				dlugoscCiaguMax = dlugoscCiagu;
+			}
+		}
+
+		// sprawdzanie pionu 
+		for(int j = 0; j < countKolumny; j++){
+			for(int i = 3; i < countWiersze; i++){
+				if(tablicaGra[i][j] == tablicaGra[i][j-1]){
+					dlugoscCiagu = 2;
+					if(tablicaGra[i][j-1] == tablicaGra[i][j-2]){
+						dlugoscCiagu = 3;
+						if(tablicaGra[i][j-2] == tablicaGra[i][j-3]){
+							dlugoscCiagu = 4;
+						}
+					}
+				}else dlugoscCiagu = 1;
+			}
+			if(dlugoscCiagu > dlugoscCiaguMax){
+				dlugoscCiaguMax = dlugoscCiagu;
+			}
+		}
 		
+		// sprawdzanie skosu
+		for(int i = 0; i < countWiersze; i++){
+			for(int j = 3; j < countKolumny; j++){
+				if(tablicaGra[i][j] == tablicaGra[i][j-1]){
+					dlugoscCiagu = 2;
+					if(tablicaGra[i][j-1] == tablicaGra[i][j-2]){
+						dlugoscCiagu = 3;
+						if(tablicaGra[i][j-2] == tablicaGra[i][j-3]){
+							dlugoscCiagu = 4;
+						}
+					}
+				}else dlugoscCiagu = 1;
+			}
+			if(dlugoscCiagu > dlugoscCiaguMax){
+				dlugoscCiaguMax = dlugoscCiagu;
+			}
+		}
+		return dlugoscCiaguMax;
 	}
 }
