@@ -6,7 +6,6 @@ public class Gra {
 		Connect4 gra = new Connect4();
 			// Zerowanie tablicy przed gra
 			gra.zerujTablice();
-			Scanner scan = new Scanner(System.in);
 
 		// URUCHOMIENIE GFY
 		System.out.println("Witaj w Connect4");	
@@ -15,12 +14,16 @@ public class Gra {
 			if(gra.kolej == 0){
 				gra.czyjaKolej();
 			}
-			System.out.println("\n\nPodaj numer kolumny");
-				int graKolumna = scan.nextInt();
+			Scanner scan = new Scanner(System.in);
+			System.out.println("\n\nPodaj numer kolumny"); 
+				int graKolumna = scan.nextInt(); // skaner linii
 				System.out.println("\nTwoja kolumna to: " + graKolumna);
 			gra.wrzucKrazek(graKolumna - 1); // -1 bo zaczynamy iteracje od 0
 			gra.wyswietlajTablice();
 			gra.czyjaKolej();
+			scan.close(); // zamykanie skanera
 		}
+
+		//boolean pelnaKolumna = Tablice.czyPelnaKolumna(gra.tablica.planszaGry, 2);
 	}
 }

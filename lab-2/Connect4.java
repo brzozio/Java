@@ -5,12 +5,13 @@ import java.util.Random;
 public class Connect4{
 	//Tablice tablica[][] = new Tablice[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana]; // konstruktor bezparametrowy
 	public Tablice tablica = new Tablice();
-	public Tablice tablica2[][] = new Tablice[6][7]; // konstruktor z dwoma argumentami
+	public Tablice tablicaParametryTablice = new Tablice(6,7); // konstruktor z dwoma argumentami
 			public void zerujTablice(){
 				//System.out.println(tablica.planszaGry[1][1]);
 				for(int i = 0; i < 6; i++){
 					for(int j = 0; j < 7; j++){
 						tablica.planszaGry[i][j] = 0;
+						tablicaParametryTablice.planszaGry[i][j] = 0;
 					}
 				}
 			}
@@ -71,6 +72,14 @@ public class Connect4{
 		if(checkFull == 0){
 			return true;
 		}else return false;
+		
+	}
+
+	public int ktoWygral(){
+
+	}
+
+	public String tablicaJakoString(){
 		
 	}
 }
