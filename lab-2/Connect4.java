@@ -1,6 +1,6 @@
 // Zasady gry
 import java.util.Arrays;
-import java.util.Random;
+import java.util.Random; // do generowania kolejnosci na starcie
 
 public class Connect4{
 	//Tablice tablica[][] = new Tablice[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana]; // konstruktor bezparametrowy
