@@ -1,8 +1,11 @@
-import javax.swing.JButton;
+import javax.swing.JButton; // przyciski
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import java.awt.GridLayout;
+import javax.swing.JOptionPane;
+
+import java.awt.GridLayout; // GridLayout
 import java.awt.Container;
+import java.awt.event.*; // ActionEvent oraz ActionListener
 
 public class Okno extends JFrame {
     Okno(){
@@ -17,37 +20,14 @@ public class Okno extends JFrame {
         JButton button3 = new JButton("Przycisk 3");
             add(button3);
 
-        public void actionPerformed(ActionEvent e){
-            numClicks++;
-            text.setText("Button clcicked " + numClicks + " times");
-        }
-
-        button3.addActionListener((e) -> {
-            button3.HEIGHT = 100;
-            button3.WIDTH = 100;
-        });
-
-        
-
-        pack();
-
-        /*
-        Container c = this.getContentPane();
-        //c.setLayout(new GridLayout(3,1));
-        JButton b;
-        c.add(b = new JButton("Otworz"));
-
-        b.addActionListener(new ActionListener() {
+        ActionListener event = new ActionListener(){ // towrzenie ActionListenera - odbiornika
             public void actionPerformed(ActionEvent arg0){
-                JDialog d = new JDialog(Okno.this, true);
-                d.setSize(200,200);
-                d.setLocationRelativeTo(null);
-                d.setVisible(true);
+                if((arg0.getModifiers() & ActionEvent.ALT_MASK) > 0){
+                    JOptionPane.showMessageDialog(Okno.this, "Alt był wcisniety");
+                }
             }
-        });
-        c.add(new JButton("Przycisk 2"));
-        c.add(new JButton("Przycisk 3"));
+        }; 
+        button.addActionListener(event);
         pack();
-    */
     }
 }
