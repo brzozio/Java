@@ -4,7 +4,7 @@ import java.text.BreakIterator;
 public class Tablice {
 	public int iloscWierszy;
 	public int iloscKolumn;
-	public int[][] planszaGry;
+	public int[][] planszaGry; // tablica gry
 
 	// ====================== KONSTRUKTORY ===================
 	// konstruktor bezparametrowy
@@ -20,8 +20,6 @@ public class Tablice {
 	}
 	// konstruktor 2 parametrowy
 	public Tablice(int iloscWierszyPrzekazywana, int iloscKolumnPrzekazywana) { 
-		this.iloscWierszy = 6;
-		this.iloscKolumn = 7;
 		this.planszaGry = new int[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana];
 			for(int i = 0; i < iloscWierszyPrzekazywana; i++){
 				for(int j = 0; j < iloscKolumnPrzekazywana; j++){
