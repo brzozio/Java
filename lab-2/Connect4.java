@@ -1,4 +1,4 @@
-// Zasady gry
+// Zasady gry, caly "silnik gry"
 import java.util.Arrays;
 import java.util.Random; // do generowania kolejnosci na starcie
 

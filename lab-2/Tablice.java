@@ -1,4 +1,4 @@
-// Tablica gry, plansza
+// Tablica gry, plansza do gry
 import java.text.BreakIterator;
 
 public class Tablice {

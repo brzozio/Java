@@ -1,4 +1,4 @@
-// Okienko glowne gry
+// Okienko glowne gry, glowne polecnia do gry
 import java.util.Scanner;
 
 public class Gra {
