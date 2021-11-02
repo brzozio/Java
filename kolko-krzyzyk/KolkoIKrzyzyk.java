@@ -40,20 +40,32 @@ public class KolkoIKrzyzyk {
     }
 
     public Gracz ktoWygral(){
+        int won = 0;
         for(Gracz g:Gracz.values()) { // petla forEach dla wartosci z enuma 
             // wiersz
             for(int w = 0; w < 3; w++){
-                if(plansza[w][0] == g && plansza[w][1] == g && plansza[w][2] == g) return g;
+                if(plansza[w][0] == g && plansza[w][1] == g && plansza[w][2] == g){
+                    won++;
+                    return g;
+                }
             }
             // kolumna
             for(int k = 0; k < 3; k++){
-                if(plansza[0][k] == g && plansza[1][k] == g && plansza[2][k] == g) return g;
+                if(plansza[0][k] == g && plansza[1][k] == g && plansza[2][k] == g){
+                    return g;
+                } 
             }
             // przekatna
-            if(plansza[0][0] == g && plansza[1][1] == g && plansza[2][2] == g) return g;
-            if(plansza[0][2] == g && plansza[1][1] == g && plansza[2][0] == g) return g;
+            if(plansza[0][0] == g && plansza[1][1] == g && plansza[2][2] == g){
+                won++;
+                return g;
+            } 
+            if(plansza[0][2] == g && plansza[1][1] == g && plansza[2][0] == g){
+                won++;
+                return g;
+            } 
         }
-        return null;
+            return Gracz.NIKT;
     }
 
     public boolean jestRemis(){
