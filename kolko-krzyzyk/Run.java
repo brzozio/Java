@@ -12,21 +12,14 @@ public class Run {
         Scanner scanner = new Scanner(System.in);
         KolkoIKrzyzyk kik = new KolkoIKrzyzyk();
 
-
-        SwingUtilities
-
-
-
-
-
-        // while(!kik.jestRemis()){
-        //     System.out.println("Czyja kolej: " + kik.getCzyjaKolej());
-        //     kik.pokazPlansze();
-        //      //String ruch = br.readLine();
-        //      System.out.println("Podaj pole w ktore chcesz umiescic znak");
-        //      String ruch = scanner.nextLine(); 
-        //     kik.wykonajRuch(ruch);
-        //     kik.ktoWygral();
-        // }
+        while(!kik.jestRemis()){
+            System.out.println("Czyja kolej: " + kik.getCzyjaKolej());
+            kik.pokazPlansze();
+             //String ruch = br.readLine();
+             System.out.println("Podaj pole w ktore chcesz umiescic znak");
+             String ruch = scanner.nextLine(); 
+            kik.wykonajRuch(ruch);
+            kik.ktoWygral();
+        }
     }
 }

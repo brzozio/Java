@@ -9,6 +9,7 @@ public class GUI extends JFrame{
     private JButton plansza[][] = new JButton[3][3];
     public GUI(KolkoIKrzyzyk kik){
         this.kik = kik;
+      //  kik.dodajOdbiornikZmianNaPlanszy(this);
         createGui();
     }
 
@@ -16,8 +17,12 @@ public class GUI extends JFrame{
         setLayout(new GridLayout(3,3));
         for(int w = 0; w < 3; w++){
             for(int k = 0; k < 3; k++){
+                String ruch = ""+(char)('A'+k)+(char)('1'+w);
                 plansza[w][k] = new JButton(w+" "+k); // nazwy komorki
                 add(plansza[w][k]);
+                plansza[w][k].addActionListener((event) -> {
+                    kik.wykonajRuch(ruch);
+                }); 
             }
         }
     }

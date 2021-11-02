@@ -67,4 +67,9 @@ public class KolkoIKrzyzyk {
         }
         return ilePustychPol==0;
     }
-}
+
+//     // GUI
+//     public void dodajOdbiornikZmianNaPlanszy(OdbiornikZmianNaplanszy odb){
+
+//     }
+ }
