@@ -1,3 +1,3 @@
 public enum Gracz {
-    KOLKO, KRZYZYK;
+    KOLKO, KRZYZYK, NIKT;
 }
