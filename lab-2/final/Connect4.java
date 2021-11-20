@@ -1,4 +1,5 @@
 // Zasady gry, caly "silnik gry"
+import java.lang.invoke.CallSite;
 import java.util.Arrays;
 import java.util.Random; // do generowania kolejnosci na starcie
 
@@ -92,6 +93,7 @@ public class Connect4{
 
 	public int ktoWygral(){
 		int ciong = Tablice.najdluzszyCiag(planszaGry, kolej);
+		System.out.println("DLUGOSC: " + ciong);
 		if(ciong > 3){
 		System.out.println("Wygral gracza: " + kolej);
 		System.out.println("Najdluzszy ciag to: " + ciong);

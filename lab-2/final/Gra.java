@@ -44,6 +44,7 @@ public class Gra {
 			//Tablice.czyPelna(gra.planszaGry[0]); // sprawdzanie dla najwyzszego wiersza czy jest pelen
 			// -1 bo zaczynamy iteracje od 0, takze zeby pokrylo sie z "1 kolumna to 1 widoczna kolumna"
 
+			System.out.flush(); // czyszcenie ekranu
 			gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
 		}
 	}
