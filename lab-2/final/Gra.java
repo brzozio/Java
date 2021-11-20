@@ -3,18 +3,30 @@ import java.util.Scanner;
 
 public class Gra {
 	public static void main(String[] args) {
-		Connect4 gra = new Connect4();
-			// Zerowanie tablicy przed gra
-			gra.zerujTablice();
-
 		// URUCHOMIENIE GFY
 		System.out.println("Witaj w Connect4");	
-			Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Podaj co chcesz utworzyc: \n1) Plansza 6x7\n2) Plansza XxY");
+		int opcjaWyborKonstruktora = scan.nextInt(); // skaner linii do wyboru konstruktora
+
+		Connect4 gra = new Connect4();
+		if(opcjaWyborKonstruktora == 1){
+			gra = new Connect4(); // twrorzenie planszy 6x7
+		} else if(opcjaWyborKonstruktora == 2){
+			System.out.println("Podaj liczbe wierszy");
+				int liczbaWierszyPrzekazywana = scan.nextInt();
+			System.out.println("Podaj liczbe kolumn");
+				int liczbaKolumnPrzekazywana = scan.nextInt();
+
+			gra = new Connect4(liczbaWierszyPrzekazywana,liczbaKolumnPrzekazywana);
+		} 
+		// Zerowanie tablicy przed gra
+			gra.zerujTablice();
 
 		while(true){
-			if(gra.kolej == 0){
-				gra.czyjaKolej();
-			}
+			gra.wyswietlajTablice(); // wyswietlanie tablicy
+			gra.czyjaKolej();
+			
 			System.out.println("\n\nPodaj numer kolumny"); 
 				int graKolumna = scan.nextInt(); // skaner linii
 				while(graKolumna > 7){ // error jesli kolumna > 7
@@ -28,11 +40,9 @@ public class Gra {
 				graKolumna = scan.nextInt(); // skaner linii
 				gra.wrzucKrazek(graKolumna - 1);
 			}
-			 // -1 bo zaczynamy iteracje od 0
-			//gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
-			gra.wyswietlajTablice(); // wyswietlanie tablicy po kazdej rundzie
+			 // -1 bo zaczynamy iteracje od 0, takze zeby pokrylo sie z "1 kolumna to 1 widoczna kolumna"
+			gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
 			gra.czyjaKolej(); // przekazywanie kolejki do kolejnego gracza
-			gra.ktoWygral();
 		}
 	}
 }

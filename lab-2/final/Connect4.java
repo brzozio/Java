@@ -3,26 +3,38 @@ import java.util.Arrays;
 import java.util.Random; // do generowania kolejnosci na starcie
 
 public class Connect4{
-	//Tablice tablica[][] = new Tablice[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana]; // konstruktor bezparametrowy
-	public Tablice tablica = new Tablice();
-	public Tablice tablicaParametryTablice = new Tablice(6,7); // konstruktor z dwoma argumentami
-	
-	//public Tablice tablica2 = new Tablice();
-	//public Tablice[][] tablicaDwaParametry = new Tablice[6][7];
-			public void zerujTablice(){
-				//System.out.println(tablica.planszaGry[1][1]);
-				for(int i = 0; i < 6; i++){
-					for(int j = 0; j < 7; j++){
-						tablica.planszaGry[i][j] = 0;
-						tablicaParametryTablice.planszaGry[i][j] = 0;
-					}
+	public int[][] planszaGry;
+
+	public Connect4() { // konstruktor 6x7
+		this.planszaGry = new int[6][7];
+			for(int i = 0; i < 6; i++){
+				for(int j = 0; j < 7; j++){
+					//this.planszaGry[i][j] = 0;
 				}
 			}
+	}
+	
+	public Connect4(int iloscWierszyPrzekazywana, int iloscKolumnPrzekazywana) { // konstruktor 2 parametrowy
+		this.planszaGry = new int[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana];
+			for(int i = 0; i < iloscWierszyPrzekazywana; i++){
+				for(int j = 0; j < iloscKolumnPrzekazywana; j++){
+					//this.planszaGry[i][j] = 0;
+				}
+			}
+	}
+
+	public void zerujTablice(){
+		for(int i = 0; i < 6; i++){
+			for(int j = 0; j < 7; j++){
+				planszaGry[i][j] = 0;
+			}
+		}
+	}
 
 	public void wyswietlajTablice(){
 		for(int i = 0; i < 6; i++){
 			for(int j = 0; j < 7; j++){
-				System.out.printf(tablica.planszaGry[i][j] + " ");
+				System.out.printf(planszaGry[i][j] + " ");
 			}
 			System.out.println("\n");
 		}
@@ -56,20 +68,20 @@ public class Connect4{
 	
 	public boolean wrzucKrazek(int kolumna) {
 		int checkFull = 0;
-		if(tablica.planszaGry[0][kolumna] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
+		if(planszaGry[0][kolumna] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
 				// sprawdzamy wolne miejsca od dolu
-			if(tablica.planszaGry[5][kolumna] == 0){
-				tablica.planszaGry[5][kolumna] = kolej;
-			} else if(tablica.planszaGry[4][kolumna] == 0){
-				tablica.planszaGry[4][kolumna] = kolej;
-			} else if(tablica.planszaGry[3][kolumna] == 0){
-				tablica.planszaGry[3][kolumna] = kolej;
-			} else if(tablica.planszaGry[2][kolumna] == 0){
-				tablica.planszaGry[2][kolumna] = kolej;
-			} else if(tablica.planszaGry[1][kolumna] == 0){
-				tablica.planszaGry[1][kolumna] = kolej;
-			} else if(tablica.planszaGry[0][kolumna] == 0){
-				tablica.planszaGry[0][kolumna] = kolej;
+			if(planszaGry[5][kolumna] == 0){
+				planszaGry[5][kolumna] = kolej;
+			} else if(planszaGry[4][kolumna] == 0){
+				planszaGry[4][kolumna] = kolej;
+			} else if(planszaGry[3][kolumna] == 0){
+				planszaGry[3][kolumna] = kolej;
+			} else if(planszaGry[2][kolumna] == 0){
+				planszaGry[2][kolumna] = kolej;
+			} else if(planszaGry[1][kolumna] == 0){
+				planszaGry[1][kolumna] = kolej;
+			} else if(planszaGry[0][kolumna] == 0){
+				planszaGry[0][kolumna] = kolej;
 			} 
 		}else checkFull++;
 		if(checkFull == 0){
@@ -79,13 +91,8 @@ public class Connect4{
 	}
 
 	public void ktoWygral(){
-		int ciong = Tablice.najdluzszyCiag(tablica.planszaGry);
+		int ciong = Tablice.najdluzszyCiag(planszaGry);
 		System.out.println("Najdluzszy ciag to: " + ciong);
 	}
-
-	/*
-	public String tablicaJakoString(){
-		
-	}*/
 
 }
