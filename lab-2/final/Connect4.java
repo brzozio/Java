@@ -4,6 +4,7 @@ import java.util.Random; // do generowania kolejnosci na starcie
 
 public class Connect4{
 	public int[][] planszaGry;
+	Tablice tablice = new Tablice();
 
 	public Connect4() { // konstruktor 6x7
 		this.planszaGry = new int[6][7];
@@ -38,7 +39,6 @@ public class Connect4{
 			}
 			System.out.println("\n");
 		}
-		//System.out.println(Arrays.asList(tablica));
 	}
 	
 	//Tablice tablica3 = new Tablice(6,7);
@@ -59,10 +59,10 @@ public class Connect4{
 			}
 			if(kolej == 1) {
 				kolej = 2;
-				return 2;
+				return kolej;
 			} else {
 				kolej = 1;
-				return 1;
+				return kolej;
 			}
 		}
 	
@@ -90,9 +90,16 @@ public class Connect4{
 		
 	}
 
-	public void ktoWygral(){
-		int ciong = Tablice.najdluzszyCiag(planszaGry);
+	public int ktoWygral(){
+		int ciong = Tablice.najdluzszyCiag(planszaGry, kolej);
+		if(ciong > 3){
+		System.out.println("Wygral gracza: " + kolej);
 		System.out.println("Najdluzszy ciag to: " + ciong);
+		if(kolej == 1){
+			return 1;
+		}else return 2;
+		}
+		return 20; // return sth aby dzialalo
 	}
 
 }

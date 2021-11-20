@@ -33,16 +33,18 @@ public class Gra {
 					System.out.println("\nError\nTwoja kolumna musi byc w zakresie <1,7>");
 					graKolumna = scan.nextInt(); // skaner linii
 				}
-				System.out.println("\nTwoja kolumna to: " + graKolumna);
+				System.out.println("\n\n\nTwoja kolumna to: " + graKolumna);
 			if(gra.wrzucKrazek(graKolumna -1) == false){
 				System.out.println("Dana kolumna jest pelna!");
 				System.out.println("\nPodaj inna kolumne");
 				graKolumna = scan.nextInt(); // skaner linii
 				gra.wrzucKrazek(graKolumna - 1);
 			}
-			 // -1 bo zaczynamy iteracje od 0, takze zeby pokrylo sie z "1 kolumna to 1 widoczna kolumna"
+			//Tablice.czyPelnaKolumna(gra.planszaGry, 2);
+			//Tablice.czyPelna(gra.planszaGry[0]); // sprawdzanie dla najwyzszego wiersza czy jest pelen
+			// -1 bo zaczynamy iteracje od 0, takze zeby pokrylo sie z "1 kolumna to 1 widoczna kolumna"
+
 			gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
-			gra.czyjaKolej(); // przekazywanie kolejki do kolejnego gracza
 		}
 	}
 }
