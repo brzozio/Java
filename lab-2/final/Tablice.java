@@ -40,9 +40,9 @@ public class Tablice {
 		//deepCopy
 	}
 	
+		public int dlugoscCiagu = 1;
 	public static int najdluzszyCiag(int[][] tablicaGra, int numerGracza) {
 		// pion, poziom, skos w obie strony
-		int dlugoscCiagu = 1; 
 		int dlugoscCiaguMax = 0;
 		int countWiersze = 6; // 6 - 1 bo start od 0
 		int countKolumny = 7; // 7 - 1 bo start od 0
