@@ -1,6 +1,8 @@
 // Okienko glowne gry, glowne polecnia do gry
 import java.util.Scanner;
 
+import javax.swing.table.TableColumn;
+
 public class Gra {
 	public static void main(String[] args) {
 		// URUCHOMIENIE GFY
@@ -46,6 +48,15 @@ public class Gra {
 
 			System.out.flush(); // czyszcenie ekranu
 			gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
+			if(gra.ktoWygral() == 1){
+				System.out.println("\n\n\n=====================\n\nWygral gracz: 1\n\n=====================");
+				break;
+			}else if(gra.ktoWygral() == 2){
+				System.out.println("\n\n\n=====================\n\nWygral gracz: 2\n\n=====================");
+				break;
+			}else if(Tablice.czyPelna(gra.planszaGry[0]) == true){
+				System.out.println("\n\n\nKONIEC GRY!\n\nNikt nie wygral, pelna tablica gry!");
+			}
 		}
 	}
 }

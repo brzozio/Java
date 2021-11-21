@@ -93,10 +93,10 @@ public class Connect4{
 
 	public int ktoWygral(){
 		int ciong = Tablice.najdluzszyCiag(planszaGry, kolej);
-		System.out.println("DLUGOSC: " + ciong);
+		//System.out.println("DLUGOSC: " + ciong);
 		if(ciong > 3){
-		System.out.println("Wygral gracza: " + kolej);
-		System.out.println("Najdluzszy ciag to: " + ciong);
+		//System.out.println("Wygral gracz: " + kolej);
+		//System.out.println("Najdluzszy ciag to: " + ciong);
 		if(kolej == 1){
 			return 1;
 		}else return 2;
