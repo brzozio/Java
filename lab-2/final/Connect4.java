@@ -105,8 +105,20 @@ public class Connect4{
 	}
 
 	public String tablicaJakoString(){
-		String cos = "cos";
-		return cos;
+		String tablicaJakoString = "";
+		for(int i = 0; i < 6; i++){
+			for(int j = 0; j < 7; j++){
+				Integer temp = planszaGry[i][j];
+				if(temp == 1 || temp == 2){
+					String tempString = temp.toString();
+					tablicaJakoString = tablicaJakoString + tempString;
+				}else if(temp == 0){
+					tablicaJakoString = tablicaJakoString + ".";
+				}
+			}
+			tablicaJakoString = tablicaJakoString + "\n";
+		}
+		return tablicaJakoString;
 	}
 
 	public void wykonajRuchAI(){

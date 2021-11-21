@@ -36,8 +36,12 @@ public class Tablice {
 		
 	}
 	
-	public static void clone(int[][] tablicaGra) {
+	public static void klonuj(int[][] tablicaGra) {
 		//deepCopy
+	}
+
+	public static void klonuj(int[] tablicaGra) {
+		//Copy
 	}
 	
 	public static int najdluzszyCiag(int[][] tablicaGra, int numerGracza) {

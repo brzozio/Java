@@ -25,28 +25,28 @@ public class Gra {
 		// Zerowanie tablicy przed gra
 			gra.zerujTablice();
 
-		System.out.println("Podaj czy chcesz zagrac z komputerem (c) czy z innym graczem (p)");
-			String znakWyborKomputerGracz = scan.next();
-		if(znakWyborKomputerGracz == "p"){
+		System.out.println("Podaj czy chcesz zagrac z komputerem (2) czy z innym graczem (1)");
+			int znakWyborKomputerGracz = scan.nextInt();
+		if(znakWyborKomputerGracz == 1){
 			while(true){
 				gra.wyswietlajTablice(); // wyswietlanie tablicy
 				gra.czyjaKolej();
 				
 				System.out.println("\n\nPodaj numer kolumny"); 
 					int graKolumna = scan.nextInt(); // skaner linii
-					while(graKolumna > 7){ // error jesli kolumna > 7
+					while(graKolumna > 7 || graKolumna < 1){ // error jesli kolumna > 7
 						System.out.println("\nError\nTwoja kolumna musi byc w zakresie <1,7>");
 						graKolumna = scan.nextInt(); // skaner linii
 					}
 					System.out.println("\n\n\nTwoja kolumna to: " + graKolumna);
-				if(gra.wrzucKrazek(graKolumna -1) == false){
+				while(gra.wrzucKrazek(graKolumna -1) == false){
 					System.out.println("Dana kolumna jest pelna!");
 					System.out.println("\nPodaj inna kolumne");
 					graKolumna = scan.nextInt(); // skaner linii
 					gra.wrzucKrazek(graKolumna - 1);
 				}
 				//Tablice.czyPelnaKolumna(gra.planszaGry, 2);
-				//Tablice.czyPelna(gra.planszaGry[0]); // sprawdzanie dla najwyzszego wiersza czy jest pelen
+				Tablice.czyPelna(gra.planszaGry[0]); // sprawdzanie dla najwyzszego wiersza czy jest pelen
 				// -1 bo zaczynamy iteracje od 0, takze zeby pokrylo sie z "1 kolumna to 1 widoczna kolumna"
 	
 				System.out.flush(); // czyszcenie ekranu
@@ -59,21 +59,25 @@ public class Gra {
 					break;
 				}else if(Tablice.czyPelna(gra.planszaGry[0]) == true){
 					System.out.println("\n\n\nKONIEC GRY!\n\nNikt nie wygral, pelna tablica gry!");
+					break;
 				}
+
+				// String tablica = gra.tablicaJakoString();
+				// 	System.out.println("Tablica jako string to: \n" + tablica);
 			}
-		}else if (znakWyborKomputerGracz == "c"){
+		}else if (znakWyborKomputerGracz == 2){
 			while(true){
 				gra.wyswietlajTablice(); // wyswietlanie tablicy
 				gra.kolej = 1; // zaczyna gracz 1 w przypadku gry z komputerem i gra tylko on
 			
 				System.out.println("\n\nPodaj numer kolumny"); 
 					int graKolumna = scan.nextInt(); // skaner linii
-					while(graKolumna > 7){ // error jesli kolumna > 7
+					while(graKolumna > 7 || graKolumna < 1){ // error jesli kolumna > 7
 						System.out.println("\nError\nTwoja kolumna musi byc w zakresie <1,7>");
 						graKolumna = scan.nextInt(); // skaner linii
 					}
 					System.out.println("\n\n\nTwoja kolumna to: " + graKolumna);
-				if(gra.wrzucKrazek(graKolumna -1) == false){
+				while(gra.wrzucKrazek(graKolumna -1) == false){
 					System.out.println("Dana kolumna jest pelna!");
 					System.out.println("\nPodaj inna kolumne");
 					graKolumna = scan.nextInt(); // skaner linii
@@ -94,8 +98,10 @@ public class Gra {
 					break;
 				}else if(Tablice.czyPelna(gra.planszaGry[0]) == true){
 					System.out.println("\n\n\nKONIEC GRY!\n\nNikt nie wygral, pelna tablica gry!");
+					break;
 				}
 			}
 		}
 	}
+
 }
