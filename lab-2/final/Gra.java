@@ -27,6 +27,10 @@ public class Gra {
 
 		System.out.println("Podaj czy chcesz zagrac z komputerem (2) czy z innym graczem (1)");
 			int znakWyborKomputerGracz = scan.nextInt();
+			while(!(znakWyborKomputerGracz == 2 || znakWyborKomputerGracz == 1)){
+				System.out.println("Podales inna liczbe niz 1 lub 2.\nPodaj czy chcesz zagrac z komputerem (2) czy z innym graczem (1)");
+				znakWyborKomputerGracz = scan.nextInt();
+			}
 		if(znakWyborKomputerGracz == 1){
 			while(true){
 				gra.wyswietlajTablice(); // wyswietlanie tablicy
