@@ -9,20 +9,20 @@ public class Connect4{
 
 	public Connect4() { // konstruktor 6x7
 		this.planszaGry = new int[6][7];
-			for(int i = 0; i < 6; i++){
-				for(int j = 0; j < 7; j++){
-					//this.planszaGry[i][j] = 0;
-				}
-			}
+			// for(int i = 0; i < 6; i++){
+			// 	for(int j = 0; j < 7; j++){
+			// 		//this.planszaGry[i][j] = 0;
+			// 	}
+			// }
 	}
 	
 	public Connect4(int iloscWierszyPrzekazywana, int iloscKolumnPrzekazywana) { // konstruktor 2 parametrowy
 		this.planszaGry = new int[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana];
-			for(int i = 0; i < iloscWierszyPrzekazywana; i++){
-				for(int j = 0; j < iloscKolumnPrzekazywana; j++){
-					//this.planszaGry[i][j] = 0;
-				}
-			}
+			// for(int i = 0; i < iloscWierszyPrzekazywana; i++){
+			// 	for(int j = 0; j < iloscKolumnPrzekazywana; j++){
+			// 		//this.planszaGry[i][j] = 0;
+			// 	}
+			// }
 	}
 
 	public void zerujTablice(){
@@ -104,4 +104,38 @@ public class Connect4{
 		return 20; // return sth aby dzialalo
 	}
 
+	public String tablicaJakoString(){
+		String cos = "cos";
+		return cos;
+	}
+
+	public void wykonajRuchAI(){
+		int kolumna = 0; // do zdefiniowania
+		boolean pelnaKomorka = false;
+			if(planszaGry[0][kolumna] == 0){
+				pelnaKomorka = false;
+			}else pelnaKomorka = true;
+		boolean brakPozwoleniaWygranaGraczaNastepnyKrok = false;
+
+
+
+
+		
+		// if(planszaGry[0][kolumna] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
+		// 		// sprawdzamy wolne miejsca od dolu
+		// 	if(planszaGry[5][kolumna] == 0){
+		// 		planszaGry[5][kolumna] = kolej;
+		// 	} else if(planszaGry[4][kolumna] == 0){
+		// 		planszaGry[4][kolumna] = kolej;
+		// 	} else if(planszaGry[3][kolumna] == 0){
+		// 		planszaGry[3][kolumna] = kolej;
+		// 	} else if(planszaGry[2][kolumna] == 0){
+		// 		planszaGry[2][kolumna] = kolej;
+		// 	} else if(planszaGry[1][kolumna] == 0){
+		// 		planszaGry[1][kolumna] = kolej;
+		// 	} else if(planszaGry[0][kolumna] == 0){
+		// 		planszaGry[0][kolumna] = kolej;
+		// 	} 
+		// }
+	}
 }
