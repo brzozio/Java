@@ -66,8 +66,25 @@ public class Gra {
 					break;
 				}
 
+
+				// ------------ SPRAWDZANIE COPY TABLIC ------------
 				// String tablica = gra.tablicaJakoString();
 				// 	System.out.println("Tablica jako string to: \n" + tablica);
+
+				// int[] tablicaSSSS = Tablice.klonuj(gra.planszaGry[5]);
+				// 	System.out.println("\n\n\n");
+				// 	for(int i = 0; i < 7; i++){
+				// 		System.out.println(tablicaSSSS[i]);
+				// 	}
+
+				// int[][] tablicaSSSSSS = Tablice.klonuj(gra.planszaGry);
+				// 	System.out.println("\n\n\n");
+				//  	for(int i = 0; i < 6; i++){
+				// 		 for(int j = 0; j < 7; j++){
+				// 			 System.out.print(tablicaSSSSSS[i][j]);
+				// 		 }
+				// 		 System.out.println("\n");
+				//  	}
 			}
 		}else if (znakWyborKomputerGracz == 2){
 			while(true){

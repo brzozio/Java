@@ -36,12 +36,26 @@ public class Tablice {
 		
 	}
 	
-	public static void klonuj(int[][] tablicaGra) {
+	public static int[][] klonuj(int[][] tablicaGra) {
 		//deepCopy
+		int[][] tablicaKlonujDwaWymiary = {{0,0,0,0,0,0,0},
+										   {0,0,0,0,0,0,0},
+										   {0,0,0,0,0,0,0},
+										   {0,0,0,0,0,0,0},
+										   {0,0,0,0,0,0,0},
+										   {0,0,0,0,0,0,0}};
+		for(int i = 0; i < 6; i++){
+			for(int j = 0; j < 7; j++){
+				tablicaKlonujDwaWymiary[i][j] = tablicaGra[i][j];
+			}
+		}
+		return tablicaKlonujDwaWymiary;
 	}
 
-	public static void klonuj(int[] tablicaGra) {
+	public static int[] klonuj(int[] tablicaGra) {
 		//Copy
+		int[] wierszTablicyKlonuj = tablicaGra;
+		return wierszTablicyKlonuj;
 	}
 	
 	public static int najdluzszyCiag(int[][] tablicaGra, int numerGracza) {
@@ -209,4 +223,5 @@ public class Tablice {
 
 		return dlugoscCiaguMax;
 	}
+
 }
