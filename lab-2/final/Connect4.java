@@ -3,7 +3,7 @@ import java.lang.invoke.CallSite;
 import java.util.Arrays;
 import java.util.Random; // do generowania kolejnosci na starcie
 
-public class Connect4{
+public class Connect4 implements Cloneable{
 	public int[][] planszaGry;
 	Tablice tablice = new Tablice();
 
@@ -139,12 +139,51 @@ public class Connect4{
 			pelnaKomorkaDoRuhu[kolumnaAI] = Tablice.czyPelnaKolumna(planszaGry, kolumnaAI); // przypisanie TRUE albo FALSE, sprawdzanie czy kolumna jest pelna
 		}
 
-		Random randomNumber = new Random();
-			int zmiennaRandomKolej = randomNumber.nextInt(7);
+		// Sprawdzanie czy gracz wygra - w tych komorkach gracz wygra
+			//Tablice.najdluzszyCiag(planszaGry, 1);
 
-		int kolumnaOfChoiceAI = zmiennaRandomKolej;
-		System.out.println("KolumnaAI: " + (kolumnaOfChoiceAI + 1));
-				//	int ciagGracza = Tablice.najdluzszyCiag(planszaGry, 1); // zwracanie ciagu gracza
+			int komorkaGdzieGraczWygraPion_wiersz = Tablice.wierszGraczaKtoryWygraPion;
+			int komorkaGdzieGraczWygraPion_kolumna = Tablice.kolumnaGraczaKtoraWygraPion;
+			
+			int komorkaGdzieGraczWygraPoziom_wiersz = Tablice.wierszGraczaKtoryWygraPoziom;
+			int komorkaGdzieGraczWygraPoziom_kolumna = Tablice.kolumnaGraczaKtoraWygraPoziom;
+
+			int komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz = Tablice.wierszGraczaKtoryWygraSkos;
+			int komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna = Tablice.kolumnaGraczaKtoraWygraSkos;
+			
+			int kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz = Tablice.wierszGraczaKtoryWygraSkos;
+			int kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna = Tablice.kolumnaGraczaKtoraWygraSkos;
+
+			int wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = 0;
+			int kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = 0;
+
+			if(komorkaGdzieGraczWygraPion_wiersz != 10 && komorkaGdzieGraczWygraPion_kolumna != 10){
+				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPion_wiersz;
+				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPion_kolumna;
+				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
+				System.out.println("\nTEST 1\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+			}else if(komorkaGdzieGraczWygraPoziom_wiersz != 10 && komorkaGdzieGraczWygraPoziom_kolumna != 10){
+				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPoziom_wiersz;
+				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPoziom_kolumna;
+				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
+				System.out.println("\nTEST 2\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+			}else if(komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz != 10 && komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna != 10){
+				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz;
+				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna;
+				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
+				System.out.println("\nTEST 3\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+			}else if(kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz != 10 && kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna != 10){
+				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz;
+				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna;
+				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
+				System.out.println("\nTEST 4\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+			}else {
+				// Wpisywanie do PLANSZY randomowo, jesli gracz nie wygra i tak w nastepnym ruchu
+				Random randomNumber = new Random();
+				int zmiennaRandomKolej = randomNumber.nextInt(7);
+				int kolumnaOfChoiceAI = zmiennaRandomKolej;
+					System.out.println("KolumnaAI: " + (kolumnaOfChoiceAI + 1));
+					//	int ciagGracza = Tablice.najdluzszyCiag(planszaGry, 1); // zwracanie ciagu gracza
 				if(planszaGry[0][kolumnaOfChoiceAI] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
 						// sprawdzamy wolne miejsca od dolu
 					if(planszaGry[5][kolumnaOfChoiceAI] == 0){
@@ -161,9 +200,8 @@ public class Connect4{
 						planszaGry[0][kolumnaOfChoiceAI] = 2;
 					} 
 				}
-			
+			}
 
-	
 		
 		// przechodzenie po tablicy prawdopodobienstw i wybieranie takiej kolumny, dla ktorej jest ono najwieksze i wykonanie ruchu
 		// wykonanie ruchu AI - wszystkie warunki sprawodzone w if
@@ -173,4 +211,16 @@ public class Connect4{
 
 		// }
 	}
+
+	@Override // Override metody CLONE z interfejsu Cloneable
+	protected Connect4 clone() {
+		try {
+			Connect4 kopia =  (Connect4) super.clone();
+		  kopia.planszaGry = planszaGry.clone();
+		  return kopia;
+		} catch (CloneNotSupportedException e) {
+		  System.out.println(this.getClass().getName() + " nie implementuje interfejsuCloneable");
+		  return null;
+		}
+	  }
 }

@@ -58,15 +58,24 @@ public class Tablice {
 		return wierszTablicyKlonuj;
 	}
 	
-	
-		static int kolumnaGraczaKtoraWygraPion = 0;
-		static int kolumnaGraczaKtoraWygraPoziom = 0;
-		static int kolumnaGraczaKtoraWygraSkos = 0;
-		static int wierszGraczaKtoryWygraPion = 0;
-		static int wierszGraczaKtoryWygraPoziom = 0;
-		static int wierszGraczaKtoryWygraSkos = 0;
+		static int kolumnaGraczaKtoraWygraPion;
+		static int kolumnaGraczaKtoraWygraPoziom;
+		static int kolumnaGraczaKtoraWygraSkos;
+		static int wierszGraczaKtoryWygraPion;
+		static int wierszGraczaKtoryWygraPoziom;
+		static int wierszGraczaKtoryWygraSkos;
+		static int kolumnaGraczaKtoryWygraSkos;
 
 	public static int najdluzszyCiag(int[][] tablicaGra, int numerGracza) {
+
+		kolumnaGraczaKtoraWygraPion = 10;
+		kolumnaGraczaKtoraWygraPoziom = 10;
+		kolumnaGraczaKtoraWygraSkos = 10;
+		wierszGraczaKtoryWygraPion = 10;
+		wierszGraczaKtoryWygraPoziom = 10;
+		wierszGraczaKtoryWygraSkos = 10;
+		kolumnaGraczaKtoryWygraSkos = 10;
+
 		// pion, poziom, skos w obie strony
 		int dlugoscCiagu = 1;
 		int dlugoscCiaguMax = 0;
@@ -84,8 +93,16 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							kolumnaGraczaKtoraWygraPoziom = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
 							wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i][j+1] == 0 && tablicaGra[i][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoraWygraPoziom = j + 1; 
+								wierszGraczaKtoryWygraPoziom = i; 
+							}
+						}else  {
+							kolumnaGraczaKtoraWygraPoziom = 10;
+							wierszGraczaKtoryWygraPoziom = 10; 
 						}
 					}
 				}
@@ -103,7 +120,10 @@ public class Tablice {
 						}
 						if(dlugoscCiagu > 2){
 							kolumnaGraczaKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
-							wierszGraczaKtoryWygraPion = i; // wiersz dla ktorego dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else {
+							kolumnaGraczaKtoraWygraPion = 10;
+							wierszGraczaKtoryWygraPion = 10;
 						}
 					}
 				}
@@ -119,6 +139,18 @@ public class Tablice {
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 4){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j + 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
@@ -129,6 +161,18 @@ public class Tablice {
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 3){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j + 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
@@ -138,37 +182,85 @@ public class Tablice {
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 2){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j + 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
 						}
 				}
 			}
 
 				dlugoscCiagu = 1;
-			for(int i = 2, j = 1; i < countWiersze && j < countKolumny; i++, j++){
+			for(int i = 1, j = 2; i < countWiersze && j < countKolumny; i++, j++){
 					if(tablicaGra[i][j] == numerGracza && tablicaGra[i][j] == tablicaGra[i-1][j-1]){
 						dlugoscCiagu++;
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						else if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j + 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
-			for(int i = 3, j = 1; i < countWiersze && j < countKolumny; i++, j++){
+			for(int i = 1, j = 3; i < countWiersze && j < countKolumny; i++, j++){
 					if(tablicaGra[i][j] == numerGracza && tablicaGra[i][j] == tablicaGra[i-1][j-1]){
 						dlugoscCiagu++;
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						else if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j + 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoraWygraPoziom = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
-			for(int i = 4, j = 1; i < countWiersze && j < countKolumny; i++, j++){
+			for(int i = 1, j = 4; i < countWiersze && j < countKolumny; i++, j++){
 					if(tablicaGra[i][j] == numerGracza && tablicaGra[i][j] == tablicaGra[i-1][j-1]){
 						dlugoscCiagu++;
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+						}
+						else if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j + 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
 						}
 				}
 			}
@@ -182,6 +274,18 @@ public class Tablice {
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j > 2){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j - 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
@@ -191,6 +295,18 @@ public class Tablice {
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j > 3){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j - 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
 						}
 				}
 			}
@@ -202,6 +318,18 @@ public class Tablice {
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j > 4){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j - 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
@@ -211,6 +339,18 @@ public class Tablice {
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j > 1){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j - 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
 						}
 				}
 			}
@@ -222,6 +362,18 @@ public class Tablice {
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j > 1){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j - 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
+						}
 				}
 			}
 				dlugoscCiagu = 1;
@@ -231,6 +383,18 @@ public class Tablice {
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}else if(j > 1){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
+							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
+								kolumnaGraczaKtoryWygraSkos = j - 1; 
+								wierszGraczaKtoryWygraSkos = i+1; 
+							}
+						}else  {
+							kolumnaGraczaKtoryWygraSkos = 10;
+							wierszGraczaKtoryWygraSkos = 10; 
 						}
 				}
 			}
