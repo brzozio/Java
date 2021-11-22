@@ -42,6 +42,10 @@ public class Connect4{
 		}
 	}
 	
+	public static void clearScreen() {  
+		System.out.print("\033[H\033[2J");  
+		System.out.flush();  
+	} 
 	//Tablice tablica3 = new Tablice(6,7);
 	/* ----- ZASADY GRY --------
 	 * 0 -pusta komorka
@@ -122,32 +126,51 @@ public class Connect4{
 	}
 
 	public void wykonajRuchAI(){
-		int kolumna = 0; // do zdefiniowania
-		boolean pelnaKomorka = false;
-			if(planszaGry[0][kolumna] == 0){
-				pelnaKomorka = false;
-			}else pelnaKomorka = true;
-		boolean brakPozwoleniaWygranaGraczaNastepnyKrok = false;
+		int[] ogolnePrawdNajlepszegoRuchu = new int[7];
+		boolean[] brakPozwoleniaWygranaGraczaNastepnyKrok = new boolean[7]; // tablica braku pozwolenia wygrabej gracza w nastepnym ruchu
+		int[] prawdopodobienstwoWygranej = new int[7]; // tablica prawdopodobienstwa do kolumn
+		boolean[] pelnaKomorkaDoRuhu = new boolean[7]; // tablica "pelnosci" kolumn
 
 
 
 
+		// petla po kolumnach
+		for(int kolumnaAI = 0; kolumnaAI < 7; kolumnaAI++){
+			pelnaKomorkaDoRuhu[kolumnaAI] = Tablice.czyPelnaKolumna(planszaGry, kolumnaAI); // przypisanie TRUE albo FALSE, sprawdzanie czy kolumna jest pelna
+		}
+
+		Random randomNumber = new Random();
+			int zmiennaRandomKolej = randomNumber.nextInt(7);
+
+		int kolumnaOfChoiceAI = zmiennaRandomKolej;
+		System.out.println("KolumnaAI: " + (kolumnaOfChoiceAI + 1));
+				//	int ciagGracza = Tablice.najdluzszyCiag(planszaGry, 1); // zwracanie ciagu gracza
+				if(planszaGry[0][kolumnaOfChoiceAI] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
+						// sprawdzamy wolne miejsca od dolu
+					if(planszaGry[5][kolumnaOfChoiceAI] == 0){
+						planszaGry[5][kolumnaOfChoiceAI] = 2;
+					} else if(planszaGry[4][kolumnaOfChoiceAI] == 0){
+						planszaGry[4][kolumnaOfChoiceAI] = 2;
+					} else if(planszaGry[3][kolumnaOfChoiceAI] == 0){
+						planszaGry[3][kolumnaOfChoiceAI] = 2;
+					} else if(planszaGry[2][kolumnaOfChoiceAI] == 0){
+						planszaGry[2][kolumnaOfChoiceAI] = 2;
+					} else if(planszaGry[1][kolumnaOfChoiceAI] == 0){
+						planszaGry[1][kolumnaOfChoiceAI] = 2;
+					} else if(planszaGry[0][kolumnaOfChoiceAI] == 0){
+						planszaGry[0][kolumnaOfChoiceAI] = 2;
+					} 
+				}
+			
+
+	
 		
-		// if(planszaGry[0][kolumna] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
-		// 		// sprawdzamy wolne miejsca od dolu
-		// 	if(planszaGry[5][kolumna] == 0){
-		// 		planszaGry[5][kolumna] = kolej;
-		// 	} else if(planszaGry[4][kolumna] == 0){
-		// 		planszaGry[4][kolumna] = kolej;
-		// 	} else if(planszaGry[3][kolumna] == 0){
-		// 		planszaGry[3][kolumna] = kolej;
-		// 	} else if(planszaGry[2][kolumna] == 0){
-		// 		planszaGry[2][kolumna] = kolej;
-		// 	} else if(planszaGry[1][kolumna] == 0){
-		// 		planszaGry[1][kolumna] = kolej;
-		// 	} else if(planszaGry[0][kolumna] == 0){
-		// 		planszaGry[0][kolumna] = kolej;
-		// 	} 
+		// przechodzenie po tablicy prawdopodobienstw i wybieranie takiej kolumny, dla ktorej jest ono najwieksze i wykonanie ruchu
+		// wykonanie ruchu AI - wszystkie warunki sprawodzone w if
+		// sprawdzamy wolne miejsca od dolu
+		
+		
+
 		// }
 	}
 }

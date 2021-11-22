@@ -58,6 +58,14 @@ public class Tablice {
 		return wierszTablicyKlonuj;
 	}
 	
+	
+		static int kolumnaGraczaKtoraWygraPion = 0;
+		static int kolumnaGraczaKtoraWygraPoziom = 0;
+		static int kolumnaGraczaKtoraWygraSkos = 0;
+		static int wierszGraczaKtoryWygraPion = 0;
+		static int wierszGraczaKtoryWygraPoziom = 0;
+		static int wierszGraczaKtoryWygraSkos = 0;
+
 	public static int najdluzszyCiag(int[][] tablicaGra, int numerGracza) {
 		// pion, poziom, skos w obie strony
 		int dlugoscCiagu = 1;
@@ -75,6 +83,10 @@ public class Tablice {
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoraWygraPoziom = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+						}
 					}
 				}
 			}
@@ -88,6 +100,10 @@ public class Tablice {
 						//System.out.println("\nPION\nKolumna " + j + " wiersz: " + i + "\nDlugosc: " + dlugoscCiagu);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+						}
+						if(dlugoscCiagu > 2){
+							kolumnaGraczaKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
+							wierszGraczaKtoryWygraPion = i; // wiersz dla ktorego dlugosc ciagu jest rowna 3
 						}
 					}
 				}
