@@ -131,12 +131,12 @@ public class Tablice {
 							}
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
+							if(numerGracza == 1 && j < countKolumny - 1){
 								if(tablicaGra[i][j+1] == 0){
 									kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
 									wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
 								}
-							}else if(numerGracza == 2){
+							}else if(numerGracza == 2 && j < countKolumny - 1){
 								if(tablicaGra[i][j+1] == 0){
 									kolumnaAIKtoraWygraPoziom = j + 1;
 									wierszAIKtoryWygraPoziom = i;
@@ -144,12 +144,12 @@ public class Tablice {
 							}
 						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1| oraz ... 1 0 1 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i][j+1] == 0 && tablicaGra[i][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
+								if(numerGracza == 1 && j < countKolumny - 1){
 									if(tablicaGra[i][j+1] == 0){
 										kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
 										wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
 									}
-								}else if(numerGracza == 2){
+								}else if(numerGracza == 2 && j < countKolumny - 1){
 									if(tablicaGra[i][j+1] == 0){
 										kolumnaAIKtoraWygraPoziom = j + 1;
 										wierszAIKtoryWygraPoziom = i;
@@ -157,12 +157,12 @@ public class Tablice {
 								}
 							}else if(j < 4){
 								if(tablicaGra[i][j] == numerGracza && tablicaGra[i][j+1] == 0 && tablicaGra[i][j+1] == numerGracza && tablicaGra[i][j+2] == numerGracza){
-									if(numerGracza == 1){
+									if(numerGracza == 1 && j < countKolumny - 1){
 										if(tablicaGra[i][j+1] == 0){
 											kolumnaGraczaKtoraWygraPoziom = j + 1; 
 											wierszGraczaKtoryWygraPoziom = i; 
 										}
-									}else if(numerGracza == 2){
+									}else if(numerGracza == 2 && j < countKolumny - 1){
 										if(tablicaGra[i][j+1] == 0){
 											kolumnaAIKtoraWygraPoziom = j + 1;
 											wierszAIKtoryWygraPoziom = i;

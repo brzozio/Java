@@ -209,22 +209,22 @@ public class Connect4 implements Cloneable{
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPion_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPion_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
-				System.out.println("\nTEST 1\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+				System.out.println("\nTEST 1\nKolumna AI: " + (kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ + 1));
 			}else if(komorkaGdzieGraczWygraPoziom_wiersz != 10 && komorkaGdzieGraczWygraPoziom_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPoziom_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPoziom_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
-				System.out.println("\nTEST 2\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+				System.out.println("\nTEST 2\nKolumna AI: " + (kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ + 1));
 			}else if(komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz != 10 && komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
-				System.out.println("\nTEST 3\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+				System.out.println("\nTEST 3\nKolumna AI: " + (kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ + 1));
 			}else if(kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz != 10 && kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
-				System.out.println("\nTEST 4\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
+				System.out.println("\nTEST 4\nKolumna AI: " + (kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ + 1));
 			}else {
 				// Wpisywanie do PLANSZY randomowo, jesli gracz nie wygra i tak w nastepnym ruchu
 				int komorkaZwiekszenieDlugosciAI_wiersz = Tablice.wierszZwiekszCiagAI;
