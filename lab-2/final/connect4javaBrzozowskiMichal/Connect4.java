@@ -1,3 +1,4 @@
+package connect4javaBrzozowskiMichal;
 // Zasady gry, caly "silnik gry"
 import java.lang.invoke.CallSite;
 import java.util.Arrays;

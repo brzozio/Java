@@ -1,3 +1,4 @@
+package connect4javaBrzozowskiMichal;
 // Tablica gry, plansza do gry
 import java.text.BreakIterator;
 

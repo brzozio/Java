@@ -1,3 +1,4 @@
+package connect4javaBrzozowskiMichal;
 // Okienko glowne gry, glowne polecnia do gry
 import java.util.Scanner;
 
@@ -58,6 +59,7 @@ public class Gra {
 				//Tablice.czyPelna(gra.planszaGry[0]); // sprawdzanie dla najwyzszego wiersza czy jest pelen
 				// -1 bo zaczynamy iteracje od 0, takze zeby pokrylo sie z "1 kolumna to 1 widoczna kolumna"
 				
+				gra.wyswietlajTablice(); // wyswietlanie tablicy
 				gra.ktoWygral(); // sprawdzanie czy gracz wrzucajacy krążek wygrał grę
 				if(gra.ktoWygral() == 1){
 					System.out.println("\n\n\n=====================\n\nWygral gracz: 1\n\n=====================");
@@ -70,7 +72,6 @@ public class Gra {
 					break;
 				}
 				//Connect4.clearScreen(); // czyszcenie ekranu
-				gra.wyswietlajTablice(); // wyswietlanie tablicy
 				
 				/* TESTOWANIE
 				// ------------ SPRAWDZANIE COPY TABLIC ------------
