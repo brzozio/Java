@@ -126,19 +126,15 @@ public class Connect4 implements Cloneable{
 	}
 
 	public void wykonajRuchAI(){
-		int[] ogolnePrawdNajlepszegoRuchu = new int[7];
-		boolean[] brakPozwoleniaWygranaGraczaNastepnyKrok = new boolean[7]; // tablica braku pozwolenia wygrabej gracza w nastepnym ruchu
-		int[] prawdopodobienstwoWygranej = new int[7]; // tablica prawdopodobienstwa do kolumn
+		//int[] ogolnePrawdNajlepszegoRuchu = new int[7];
+		//boolean[] brakPozwoleniaWygranaGraczaNastepnyKrok = new boolean[7]; // tablica braku pozwolenia wygrabej gracza w nastepnym ruchu
+		//int[] prawdopodobienstwoWygranej = new int[7]; // tablica prawdopodobienstwa do kolumn
 		boolean[] pelnaKomorkaDoRuhu = new boolean[7]; // tablica "pelnosci" kolumn
-
-
-
 
 		// petla po kolumnach
 		for(int kolumnaAI = 0; kolumnaAI < 7; kolumnaAI++){
 			pelnaKomorkaDoRuhu[kolumnaAI] = Tablice.czyPelnaKolumna(planszaGry, kolumnaAI); // przypisanie TRUE albo FALSE, sprawdzanie czy kolumna jest pelna
 		}
-
 		// Sprawdzanie czy gracz wygra - w tych komorkach gracz wygra
 			//Tablice.najdluzszyCiag(planszaGry, 1);
 
@@ -252,15 +248,6 @@ public class Connect4 implements Cloneable{
 					} 
 				}
 			}
-
-		
-		// przechodzenie po tablicy prawdopodobienstw i wybieranie takiej kolumny, dla ktorej jest ono najwieksze i wykonanie ruchu
-		// wykonanie ruchu AI - wszystkie warunki sprawodzone w if
-		// sprawdzamy wolne miejsca od dolu
-		
-		
-
-		// }
 	}
 
 	@Override // Override metody CLONE z interfejsu Cloneable
