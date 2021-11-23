@@ -158,12 +158,21 @@ public class Tablice {
 							}else if(j < 4){
 								if(tablicaGra[i][j] == numerGracza && tablicaGra[i][j+1] == 0 && tablicaGra[i][j+1] == numerGracza && tablicaGra[i][j+2] == numerGracza){
 									if(numerGracza == 1 && j < countKolumny - 1){
-										if(tablicaGra[i][j+1] == 0){
-											kolumnaGraczaKtoraWygraPoziom = j + 1; 
-											wierszGraczaKtoryWygraPoziom = i; 
+										if(tablicaGra[i][j+1] == 0){ // czy komorka pod jest rozna od 0 aby wstawic
+											if(i == countWiersze - 1){ // jesli w ostatnim to nie sprawdzamy czy jest rozna od 0 pod
+												kolumnaGraczaKtoraWygraPoziom = j + 1; 
+												wierszGraczaKtoryWygraPoziom = i; 
+											}else if(tablicaGra[i+1][j+1] != 0){
+												kolumnaGraczaKtoraWygraPoziom = j + 1; 
+												wierszGraczaKtoryWygraPoziom = i;
+											}
+											
 										}
 									}else if(numerGracza == 2 && j < countKolumny - 1){
 										if(tablicaGra[i][j+1] == 0){
+											kolumnaAIKtoraWygraPoziom = j + 1;
+											wierszAIKtoryWygraPoziom = i;
+										}else if(tablicaGra[i+1][j+1] != 0){
 											kolumnaAIKtoraWygraPoziom = j + 1;
 											wierszAIKtoryWygraPoziom = i;
 										}
@@ -191,13 +200,13 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
+							if(numerGracza == 1 && i > 2){
 								if(tablicaGra[i-3][j] == 0){
 									kolumnaGraczaKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
 									wierszGraczaKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
 								}
 								
-							}else if(numerGracza == 2){
+							}else if(numerGracza == 2 && i > 2){
 								if(tablicaGra[i-3][j] == 0){
 									kolumnaAIKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
 									wierszAIKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
