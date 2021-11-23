@@ -1,6 +1,8 @@
 // Tablica gry, plansza do gry
 import java.text.BreakIterator;
 
+import javax.swing.text.TableView.TableCell;
+
 public class Tablice {
 	
 	private static int iloscZerowychElementow;
@@ -74,6 +76,10 @@ public class Tablice {
 		static int wierszAIKtoryWygraSkos;
 		static int kolumnaAIKtoryWygraSkos;
 
+		static int dlugoscCiaguAI;
+		static int wierszZwiekszCiagAI;
+		static int kolumnaZwiekszCiagAI;
+
 	public static int najdluzszyCiag(int[][] tablicaGra, int numerGracza) {
 
 		kolumnaGraczaKtoraWygraPion = 10;
@@ -92,6 +98,11 @@ public class Tablice {
 		wierszAIKtoryWygraSkos = 10;
 		kolumnaAIKtoryWygraSkos = 10;
 
+		dlugoscCiaguAI = 1;
+		wierszZwiekszCiagAI = 10;
+		kolumnaZwiekszCiagAI = 10;
+
+
 		// pion, poziom, skos w obie strony
 		int dlugoscCiagu = 1;
 		int dlugoscCiaguMax = 0;
@@ -107,23 +118,55 @@ public class Tablice {
 						//System.out.println("\nPOZIOM\nKolumna " + j + " wiersz: " + i);
 						if(dlugoscCiagu > dlugoscCiaguMax){
 							dlugoscCiaguMax = dlugoscCiagu;
+							if(tablicaGra[i][j] == 2 && j < countKolumny - 1){ // AI
+								dlugoscCiaguAI = dlugoscCiagu;
+								if(tablicaGra[i][j+1] == 0){
+									wierszZwiekszCiagAI = i;
+									kolumnaZwiekszCiagAI = j + 1;
+								}else {
+									wierszZwiekszCiagAI = 10;
+									kolumnaZwiekszCiagAI = 10;
+								}
+							}
 						}
 						if(dlugoscCiagu > 2){
 							if(numerGracza == 1){
-								kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(tablicaGra[i][j+1] == 0){
+									kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+									wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								}
 							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraPoziom = j + 1;
-								wierszAIKtoryWygraPoziom = i;
+								if(tablicaGra[i][j+1] == 0){
+									kolumnaAIKtoraWygraPoziom = j + 1;
+									wierszAIKtoryWygraPoziom = i;
+								}
 							}
 						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1| oraz ... 1 0 1 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i][j+1] == 0 && tablicaGra[i][j+2] == numerGracza){ // ciag 1 1 0 1 np
 								if(numerGracza == 1){
-									kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+									if(tablicaGra[i][j+1] == 0){
+										kolumnaGraczaKtoraWygraPoziom = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
+										wierszGraczaKtoryWygraPoziom = i; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+									}
 								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraPoziom = j + 1;
-									wierszAIKtoryWygraPoziom = i;
+									if(tablicaGra[i][j+1] == 0){
+										kolumnaAIKtoraWygraPoziom = j + 1;
+										wierszAIKtoryWygraPoziom = i;
+									}
+								}
+							}else if(j < 4){
+								if(tablicaGra[i][j] == numerGracza && tablicaGra[i][j+1] == 0 && tablicaGra[i][j+1] == numerGracza && tablicaGra[i][j+2] == numerGracza){
+									if(numerGracza == 1){
+										if(tablicaGra[i][j+1] == 0){
+											kolumnaGraczaKtoraWygraPoziom = j + 1; 
+											wierszGraczaKtoryWygraPoziom = i; 
+										}
+									}else if(numerGracza == 2){
+										if(tablicaGra[i][j+1] == 0){
+											kolumnaAIKtoraWygraPoziom = j + 1;
+											wierszAIKtoryWygraPoziom = i;
+										}
+									}
 								}
 							}
 						}else  {
@@ -148,11 +191,16 @@ public class Tablice {
 						}
 						if(dlugoscCiagu > 2){
 							if(numerGracza == 1){
-								kolumnaGraczaKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(tablicaGra[i-3][j] == 0){
+									kolumnaGraczaKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
+									wierszGraczaKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
+								}
+								
 							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(tablicaGra[i-3][j] == 0){
+									kolumnaAIKtoraWygraPion = j; // kolumna w ktorej dlugosc ciagu jest rowna 3
+									wierszAIKtoryWygraPion = i - 3; // wiersz dla ktorego dlugosc ciagu jest rowna 3
+								}
 							}
 						}else {
 							kolumnaGraczaKtoryWygraSkos = 10;
@@ -175,21 +223,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+							if(numerGracza == 1 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j + 1; 
+									wierszGraczaKtoryWygraSkos = i+1; 
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaAIKtoryWygraSkos = j + 1; 
+									wierszAIKtoryWygraSkos = i+1; 
+								}
 							}
 						}else if(j < 4){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2) {
-									kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(numerGracza == 1 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j + 1; 
+										wierszGraczaKtoryWygraSkos = i+1; 
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1)) {
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaAIKtoryWygraSkos = j + 1;
+										wierszAIKtoryWygraSkos = i+1; 
+									}
 								}
 							}
 						}else  {
@@ -209,21 +265,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+							if(numerGracza == 1 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j + 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaAIKtoryWygraSkos = j + 1; 
+									wierszAIKtoryWygraSkos = i+1;
+								}
 							}
 						}else if(j < 3){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(numerGracza == 1 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j + 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaAIKtoryWygraSkos = j + 1; 
+										wierszAIKtoryWygraSkos = i+1;
+									}
 								}
 							}
 						}else  {
@@ -243,21 +307,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+							if(numerGracza == 1 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j + 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaAIKtoryWygraSkos = j + 1; 
+									wierszAIKtoryWygraSkos = i+1;
+								}
 							}
 						}else if(j < 2){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(numerGracza == 1 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j + 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaAIKtoryWygraSkos = j + 1; 
+										wierszAIKtoryWygraSkos = i+1;
+									}
 								}
 							}
 						}else  {
@@ -278,21 +350,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						else if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+							if(numerGracza == 1 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j + 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaAIKtoryWygraSkos = j + 1; 
+									wierszAIKtoryWygraSkos = i+1;
+								}
 							}
 						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(numerGracza == 1 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j + 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaAIKtoryWygraSkos = j + 1; 
+										wierszAIKtoryWygraSkos = i+1;
+									}
 								}
 							}
 						}else  {
@@ -312,21 +392,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						else if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+							if(numerGracza == 1 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j + 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaAIKtoryWygraSkos = j + 1; 
+									wierszAIKtoryWygraSkos = i+1;
+								}
 							}
 						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(numerGracza == 1 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j + 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaAIKtoryWygraSkos = j + 1; 
+										wierszAIKtoryWygraSkos = i+1;
+									}
 								}
 							}
 						}else  {
@@ -346,21 +434,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						else if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+							if(numerGracza == 1 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j + 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1)){
+								if(tablicaGra[i+1][j+1] == 0){
+									kolumnaAIKtoryWygraSkos = j + 1; 
+									wierszAIKtoryWygraSkos = i+1;
+								}
 							}
 						}else if(j < 5){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j+1] == 0 && tablicaGra[i+2][j+2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoryWygraSkos = j + 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszAIKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
+								if(numerGracza == 1 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j + 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1)){
+									if(tablicaGra[i+1][j+1] == 0){
+										kolumnaAIKtoryWygraSkos = j + 1; 
+										wierszAIKtoryWygraSkos = i+1;
+									}
 								}
 							}
 						}else  {
@@ -382,21 +478,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraSkos = j - 1;
-								wierszAIKtoryWygraSkos = i + 1;
+							if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j - 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaAIKtoraWygraSkos = j - 1;
+									wierszAIKtoryWygraSkos = i + 1;
+								}
 							}
 						}else if(j > 2){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraSkos = j - 1;
-									wierszAIKtoryWygraSkos = i + 1;
+								if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j - 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaAIKtoraWygraSkos = j - 1;
+										wierszAIKtoryWygraSkos = i + 1;
+									}
 								}
 							}
 						}else  {
@@ -416,21 +520,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraSkos = j - 1;
-								wierszAIKtoryWygraSkos = i + 1;
+							if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j - 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaAIKtoraWygraSkos = j - 1;
+									wierszAIKtoryWygraSkos = i + 1;
+								}
 							}
 						}else if(j > 3){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraSkos = j - 1;
-									wierszAIKtoryWygraSkos = i + 1;
+								if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j - 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaAIKtoraWygraSkos = j - 1;
+										wierszAIKtoryWygraSkos = i + 1;
+									}
 								}
 							}
 						}else  {
@@ -450,21 +562,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraSkos = j - 1;
-								wierszAIKtoryWygraSkos = i + 1;
+							if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j - 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaAIKtoraWygraSkos = j - 1;
+									wierszAIKtoryWygraSkos = i + 1;
+								}
 							}
 						}else if(j > 4){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraSkos = j - 1;
-									wierszAIKtoryWygraSkos = i + 1;
+								if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j - 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaAIKtoraWygraSkos = j - 1;
+										wierszAIKtoryWygraSkos = i + 1;
+									}
 								}
 							}
 						}else  {
@@ -484,21 +604,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraSkos = j - 1;
-								wierszAIKtoryWygraSkos = i + 1;
+							if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j - 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaAIKtoraWygraSkos = j - 1;
+									wierszAIKtoryWygraSkos = i + 1;
+								}
 							}
 						}else if(j > 1){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraSkos = j - 1;
-									wierszAIKtoryWygraSkos = i + 1;
+								if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j - 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaAIKtoraWygraSkos = j - 1;
+										wierszAIKtoryWygraSkos = i + 1;
+									}
 								}
 							}
 						}else  {
@@ -518,21 +646,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraSkos = j - 1;
-								wierszAIKtoryWygraSkos = i + 1;
+							if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j - 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaAIKtoraWygraSkos = j - 1;
+									wierszAIKtoryWygraSkos = i + 1;
+								}
 							}
 						}else if(j > 1){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraSkos = j - 1;
-									wierszAIKtoryWygraSkos = i + 1;
+								if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j - 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaAIKtoraWygraSkos = j - 1;
+										wierszAIKtoryWygraSkos = i + 1;
+									}
 								}
 							}
 						}else  {
@@ -552,21 +688,29 @@ public class Tablice {
 							dlugoscCiaguMax = dlugoscCiagu;
 						}
 						if(dlugoscCiagu > 2){
-							if(numerGracza == 1){
-								kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-								wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-							}else if(numerGracza == 2){
-								kolumnaAIKtoraWygraSkos = j - 1;
-								wierszAIKtoryWygraSkos = i + 1;
+							if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaGraczaKtoryWygraSkos = j - 1;
+									wierszGraczaKtoryWygraSkos = i+1;
+								}
+							}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+								if(tablicaGra[i+1][j-1] == 0){
+									kolumnaAIKtoraWygraSkos = j - 1;
+									wierszAIKtoryWygraSkos = i + 1;
+								}
 							}
 						}else if(j > 1){ // aby nie wyjsc poza tabele, to sprawdzamy do maks. . . . 1 1 0 1|
 							if(dlugoscCiagu == 2 && tablicaGra[i+1][j-1] == 0 && tablicaGra[i+2][j-2] == numerGracza){ // ciag 1 1 0 1 np
-								if(numerGracza == 1){
-									kolumnaGraczaKtoryWygraSkos = j - 1; // kolumna w ktorej dlugosc ciagu jest rowna 3
-									wierszGraczaKtoryWygraSkos = i+1; // aktualny wiersz dla ktorego dlugosc ciagu jest rowna 3
-								}else if(numerGracza == 2){
-									kolumnaAIKtoraWygraSkos = j - 1;
-									wierszAIKtoryWygraSkos = i + 1;
+								if(numerGracza == 1 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaGraczaKtoryWygraSkos = j - 1;
+										wierszGraczaKtoryWygraSkos = i+1;
+									}
+								}else if(numerGracza == 2 && i < (countWiersze - 1) && j > 0){
+									if(tablicaGra[i+1][j-1] == 0){
+										kolumnaAIKtoraWygraSkos = j - 1;
+										wierszAIKtoryWygraSkos = i + 1;
+									}
 								}
 							}
 						}else  {

@@ -225,12 +225,17 @@ public class Connect4 implements Cloneable{
 				System.out.println("\nTEST 4\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
 			}else {
 				// Wpisywanie do PLANSZY randomowo, jesli gracz nie wygra i tak w nastepnym ruchu
+				int komorkaZwiekszenieDlugosciAI_wiersz = Tablice.wierszZwiekszCiagAI;
+				int komorkaZwiekszenieDlugosciAI_kolumna = Tablice.kolumnaZwiekszCiagAI;
+
 				Random randomNumber = new Random();
 				int zmiennaRandomKolej = randomNumber.nextInt(7);
 				int kolumnaOfChoiceAI = zmiennaRandomKolej;
 					System.out.println("KolumnaAI: " + (kolumnaOfChoiceAI + 1));
 					//	int ciagGracza = Tablice.najdluzszyCiag(planszaGry, 1); // zwracanie ciagu gracza
-				if(planszaGry[0][kolumnaOfChoiceAI] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
+				if(komorkaZwiekszenieDlugosciAI_wiersz != 10 && komorkaGdzieAIWygraPion_kolumna != 10){
+					planszaGry[komorkaZwiekszenieDlugosciAI_wiersz][komorkaZwiekszenieDlugosciAI_kolumna] = 2;
+				}else if(planszaGry[0][kolumnaOfChoiceAI] == 0){ // sprawdzanie czy gorna komorka jest pusta aby dodac do tej kolumny
 						// sprawdzamy wolne miejsca od dolu
 					if(planszaGry[5][kolumnaOfChoiceAI] == 0){
 						planszaGry[5][kolumnaOfChoiceAI] = 2;
