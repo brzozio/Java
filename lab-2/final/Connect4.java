@@ -142,6 +142,7 @@ public class Connect4 implements Cloneable{
 		// Sprawdzanie czy gracz wygra - w tych komorkach gracz wygra
 			//Tablice.najdluzszyCiag(planszaGry, 1);
 
+			// Gracz
 			int komorkaGdzieGraczWygraPion_wiersz = Tablice.wierszGraczaKtoryWygraPion;
 			int komorkaGdzieGraczWygraPion_kolumna = Tablice.kolumnaGraczaKtoraWygraPion;
 			
@@ -157,22 +158,67 @@ public class Connect4 implements Cloneable{
 			int wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = 0;
 			int kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = 0;
 
-			if(komorkaGdzieGraczWygraPion_wiersz != 10 && komorkaGdzieGraczWygraPion_kolumna != 10){
+			// AI
+			int komorkaGdzieAIWygraPion_wiersz = Tablice.wierszAIKtoryWygraPion;
+			int komorkaGdzieAIWygraPion_kolumna = Tablice.kolumnaAIKtoraWygraPion;
+			
+			int komorkaGdzieAIWygraPoziom_wiersz = Tablice.wierszAIKtoryWygraPoziom;
+			int komorkaGdzieAIWygraPoziom_kolumna = Tablice.kolumnaAIKtoraWygraPoziom;
+
+			int komorkaGdzieAIWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz = Tablice.wierszAIKtoryWygraSkos;
+			int komorkaGdzieAIWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna = Tablice.kolumnaAIKtoraWygraSkos;
+			
+			int kolumnaAIKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz = Tablice.wierszAIKtoryWygraSkos;
+			int kolumnaAIKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna = Tablice.kolumnaAIKtoraWygraSkos;
+
+			int wierszDoWpisaniaAI_WYGRANA = 0;
+			int kolumnaDoWpisaniaAI_WYGRANA= 0;
+
+			// % na wykonanie ruchu do danej komorki, w ktorej gracz wygra 
+				Random randomGraczNext = new Random();
+				boolean pstwoMovement = false;
+				int zmiennaRandomAIMovement = randomGraczNext.nextInt(100);
+					if(zmiennaRandomAIMovement < 76){ // 75% szans na wykonanie ruchu blokujacego
+						pstwoMovement = true;
+					}
+				
+			int checkSizeAI = Tablice.najdluzszyCiag(planszaGry, 2);
+			if(komorkaGdzieAIWygraPion_wiersz != 10 && komorkaGdzieAIWygraPion_kolumna != 10 && pstwoMovement == true && checkSizeAI == 3){
+				wierszDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraPion_wiersz;
+				kolumnaDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraPion_kolumna;
+				planszaGry[wierszDoWpisaniaAI_WYGRANA][kolumnaDoWpisaniaAI_WYGRANA] = 2;
+			}else if(komorkaGdzieAIWygraPoziom_wiersz != 10 && komorkaGdzieAIWygraPoziom_kolumna != 10 && pstwoMovement == true && checkSizeAI == 3){
+				wierszDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraPoziom_wiersz;
+				kolumnaDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraPoziom_kolumna;
+				planszaGry[wierszDoWpisaniaAI_WYGRANA][kolumnaDoWpisaniaAI_WYGRANA] = 2;
+			}else if(komorkaGdzieAIWygraPoziom_wiersz != 10 && komorkaGdzieAIWygraPoziom_kolumna != 10 && pstwoMovement == true && checkSizeAI == 3){
+				wierszDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraPoziom_wiersz;
+				kolumnaDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraPoziom_kolumna;
+				planszaGry[wierszDoWpisaniaAI_WYGRANA][kolumnaDoWpisaniaAI_WYGRANA] = 2;
+			}else if(kolumnaAIKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz != 10 && kolumnaAIKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna != 10 && pstwoMovement == true && checkSizeAI == 3){
+				wierszDoWpisaniaAI_WYGRANA = kolumnaAIKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz;
+				kolumnaDoWpisaniaAI_WYGRANA = kolumnaAIKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna;
+				planszaGry[wierszDoWpisaniaAI_WYGRANA][kolumnaDoWpisaniaAI_WYGRANA] = 2;
+			}else if(komorkaGdzieAIWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz != 10 && komorkaGdzieAIWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna != 10 && pstwoMovement == true && checkSizeAI == 3){
+				wierszDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz;
+				kolumnaDoWpisaniaAI_WYGRANA = komorkaGdzieAIWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna;
+				planszaGry[wierszDoWpisaniaAI_WYGRANA][kolumnaDoWpisaniaAI_WYGRANA] = 2;
+			}else if(komorkaGdzieGraczWygraPion_wiersz != 10 && komorkaGdzieGraczWygraPion_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPion_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPion_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
 				System.out.println("\nTEST 1\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
-			}else if(komorkaGdzieGraczWygraPoziom_wiersz != 10 && komorkaGdzieGraczWygraPoziom_kolumna != 10){
+			}else if(komorkaGdzieGraczWygraPoziom_wiersz != 10 && komorkaGdzieGraczWygraPoziom_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPoziom_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraPoziom_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
 				System.out.println("\nTEST 2\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
-			}else if(komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz != 10 && komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna != 10){
+			}else if(komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz != 10 && komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = komorkaGdzieGraczWygraSkos_TOP_LEFT_DOWN_RIGHT_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
 				System.out.println("\nTEST 3\nKolumna AI: " + kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ);
-			}else if(kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz != 10 && kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna != 10){
+			}else if(kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz != 10 && kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna != 10 && pstwoMovement == true){
 				wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_wiersz;
 				kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ = kolumnaGraczaKtoraWygraSkos_TOP_RIGHT_DOWN_LEFT_kolumna;
 				planszaGry[wierszDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ][kolumnaDoWpisaniaAI_BRAK_WYGRANEJ_GRACZ] = 2;
