@@ -34,12 +34,17 @@ public class Connect4 implements Cloneable{
 	}
 
 	public void wyswietlajTablice(){
+		System.out.println("====================");
+		System.out.println("    1 2 3 4 5 6 7");
+		System.out.println("--------------------");
 		for(int i = 0; i < 6; i++){
+			System.out.print((i+1) + ":  ");
 			for(int j = 0; j < 7; j++){
 				System.out.printf(planszaGry[i][j] + " ");
 			}
 			System.out.println("\n");
 		}
+		System.out.println("====================");
 	}
 	
 	public static void clearScreen() {  

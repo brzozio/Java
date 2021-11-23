@@ -21,6 +21,9 @@ public class Gra {
 			int liczbaKolumnPrzekazywana = scan.nextInt();
 			
 			gra = new Connect4(liczbaWierszyPrzekazywana,liczbaKolumnPrzekazywana);
+			
+				System.out.println("eee, i tak bedziesz gral na 6x7 :)");
+				gra = new Connect4();
 		} 
 		// Zerowanie tablicy przed gra
 		gra.zerujTablice();
