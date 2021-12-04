@@ -36,7 +36,7 @@ public class Okno1 extends JFrame {
             add(button);
 
         ActionListener event = new ActionListener(){ // towrzenie ActionListenera - odbiornika
-            public void actionPerformed(ActionEvent arg0){
+            public void actionPerformed(ActionEvent e){
                 String imieShow = imieText.getText();
                 String kierunekShow = kierunekText.getText();
                 JOptionPane.showMessageDialog(Okno1.this, "Cześć " + imieShow + " studiujacy na kierunku " + kierunekShow);
