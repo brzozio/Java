@@ -19,6 +19,9 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 public class Okno2 extends JFrame {
+    double[][] tabela = new double[2][2];
+    Macierz macierz = new Macierz(tabela);
+
     Okno2(){
         setTitle("Drugie okno");
         setSize(420,420);
@@ -52,17 +55,16 @@ public class Okno2 extends JFrame {
          JButton przyciskSouthPanel = new JButton("OBLICZ WYZNACZNIK");
              southTextPanel.add(przyciskSouthPanel);
 
-             double[][] tabela = new double[2][2];
+            //   double[][] tabela = new double[2][2];
              ActionListener event = new ActionListener(){ // towrzenie ActionListenera - odbiornika
                  public void actionPerformed(ActionEvent arg0){
                      
-                     tabela[0][0] = Double.parseDouble(macierz11.getText());
-                     tabela[1][0] = Double.parseDouble(macierz21.getText());
-                     tabela[0][1] = Double.parseDouble(macierz12.getText());
-                     tabela[1][1] = Double.parseDouble(macierz22.getText());
+                     macierz.tabela[0][0] = Double.parseDouble(macierz11.getText());
+                     macierz.tabela[1][0] = Double.parseDouble(macierz21.getText());
+                     macierz.tabela[0][1] = Double.parseDouble(macierz12.getText());
+                     macierz.tabela[1][1] = Double.parseDouble(macierz22.getText());
                    
-
-                     double wynik = tabela[0][0]*tabela[1][1] - tabela[0][1]*tabela[1][0];
+                    double wynik = macierz.dajWyznacznik();
                      JOptionPane.showMessageDialog(Okno2.this, "Wynik to: " + wynik);
                   }
               }; 
@@ -70,16 +72,43 @@ public class Okno2 extends JFrame {
 
         
         JButton buttonSuma = new JButton("SUMA");
-            add(buttonSuma);
+        southTextPanel.add(buttonSuma);
 
         ActionListener suma = new ActionListener(){ // towrzenie ActionListenera - odbiornika
             public void actionPerformed(ActionEvent arg0){
-                JOptionPane.showMessageDialog(Okno2.this, "");
-                double suma = tabela[0][0] + tabela[1][0] + tabela[0][1] + tabela[1][1];
+                macierz.tabela[0][0] = Double.parseDouble(macierz11.getText());
+                macierz.tabela[1][0] = Double.parseDouble(macierz21.getText());
+                macierz.tabela[0][1] = Double.parseDouble(macierz12.getText());
+                macierz.tabela[1][1] = Double.parseDouble(macierz22.getText());
+
+                double suma = macierz.tabela[0][0] + macierz.tabela[1][0] + macierz.tabela[0][1] + macierz.tabela[1][1];
                 JOptionPane.showMessageDialog(Okno2.this,"Wynik to: " + suma);
              }
          }; 
             buttonSuma.addActionListener(suma);
+
+        JButton buttonTransponuj = new JButton("TRANSPONUJ");
+        southTextPanel.add(buttonTransponuj);
+
+            ActionListener Transponuj = new ActionListener(){ // towrzenie ActionListenera - odbiornika
+                public void actionPerformed(ActionEvent arg0){
+                    macierz.tabela[0][0] = Double.parseDouble(macierz11.getText());
+                    macierz.tabela[1][0] = Double.parseDouble(macierz21.getText());
+                    macierz.tabela[0][1] = Double.parseDouble(macierz12.getText());
+                    macierz.tabela[1][1] = Double.parseDouble(macierz22.getText());
+
+                    double[][] tablicaTemp = new double[2][2];
+                        tablicaTemp[0][1] = macierz.tabela[0][1];
+                        tablicaTemp[1][0] = macierz.tabela[1][0];
+                        
+                        macierz.tabela[0][1] = tablicaTemp[1][0];
+                        macierz.tabela[1][0] = tablicaTemp[0][1];
+
+                    macierz12.setText("" + macierz.tabela[0][1]);
+                    macierz21.setText("" + macierz.tabela[1][0]);
+                 }
+             }; 
+             buttonTransponuj.addActionListener(Transponuj);
 
         pack();
     }
