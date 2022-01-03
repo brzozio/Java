@@ -1,0 +1,33 @@
+for(int i = 0; i < countWiersze; i++){
+			for(int j = countKolumny - 1 - 3; j >= 0; j--){
+				if(tablicaGra[i][j] == tablicaGra[i][j+1]){
+					dlugoscCiagu = 2;
+					if(tablicaGra[i][j+1] == tablicaGra[i][j+2]){
+						dlugoscCiagu = 3;
+						if(tablicaGra[i][j+2] == tablicaGra[i][j+3]){
+							dlugoscCiagu = 4;
+						}
+					}
+				}else dlugoscCiagu = 1;
+			}
+			if(dlugoscCiagu > dlugoscCiaguMax){
+				dlugoscCiaguMax = dlugoscCiagu;
+			}
+		}
+
+for(int j = 0; j < countKolumny; j++){
+			for(int i = countWiersze - 1 - 3; i >= 0; i--){
+				if(tablicaGra[i][j] == tablicaGra[i][j+1]){
+					dlugoscCiagu = 2;
+					if(tablicaGra[i][j+1] == tablicaGra[i][j+2]){
+						dlugoscCiagu = 3;
+						if(tablicaGra[i][j+2] == tablicaGra[i][j+3]){
+							dlugoscCiagu = 4;
+						}
+					}
+				}else dlugoscCiagu = 1;
+			}
+			if(dlugoscCiagu > dlugoscCiaguMax){
+				dlugoscCiaguMax = dlugoscCiagu;
+			}
+		}
