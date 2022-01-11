@@ -1,4 +1,7 @@
 public class FixedSudokuField extends SudokuField {
-    SudokuField sudoku = new SudokuField();
+    public int fixedFieldValue = 0;
+    
+    SudokuField sudoku = new SudokuField(fixedFieldValue);
+    
     sudoku.setDisplayedValue();
 }
