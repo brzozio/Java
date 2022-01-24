@@ -1,3 +1,5 @@
+import javax.swing.JFrame;
+
 public class Connect4GUI extends JFrame implements ColumnClickListener, GameStateListener {
     //pola
     int column,row,numberOfPlayers;
@@ -10,9 +12,9 @@ public class Connect4GUI extends JFrame implements ColumnClickListener, GameStat
 			gra = new Connect4(); // tworzenie i tak planszy 6x7
 		} 
 		// Zerowanie tablicy przed gra
+        gra.GameStateListener
 		gra.zerujTablice();
         this.createGUI();
-        GameStateListener = Connect4GUI.this;
     }
 
     public void createGUI(){

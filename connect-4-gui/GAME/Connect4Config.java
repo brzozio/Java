@@ -72,7 +72,7 @@ public class Connect4Config extends JDialog{
         ActionListener graj = new ActionListener(){ // towrzenie ActionListenera - odbiornika
             public void actionPerformed(ActionEvent e){
                 Connect4GUI c4gui = new Connect4GUI(wiersze,kolumny,iloscGraczy);
-                new c4gui().setVisible(true);
+                    c4gui.setVisible(true);
                 this.setVisible(false);
                 this.dispose();
             }
