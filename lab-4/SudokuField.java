@@ -1,18 +1,37 @@
+import java.awt.Color;
+
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 
-public class SudokuField extends JLabel{
+abstract class SudokuField extends JLabel{
     private int value;
-
-    public SudokuField(int value){
-        this.setSudokuField();
+    JLabel label = new JLabel();
+    public SudokuField(int valueInjected){
+        this.setDisplayedValue(valueInjected);
     }
 
-    protected void getSudokuField();
-    protected void setSudokuField();
+    protected SudokuField getSudokuField(){
+        return this;
+    }
+    protected void setSudokuField(){
+      //
+    }
 
-    protected void setDisplayedValue(){
-        if(this.value != 0){
-
-        }
+    protected void setDisplayedValue(int valueInjected){
+        if(value != 0){
+            this.value = valueInjected;
+            Integer integerValue = valueInjected;
+            String valueString = integerValue.toString();
+            this.label.setText(valueString);
+        }else this.value = (Integer) null;
+    }
+    
+    public void setError(boolean bboolean){
+    if(bboolean == true){
+        this.setBackground(Color.red);
+    }else if(bboolean == false){
+        UIManager.getColor("Panel.background");
+    }
+        
     }
 }
