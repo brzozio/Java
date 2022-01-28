@@ -1,56 +1,82 @@
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class SudokuWindow extends JFrame implements FieldValueChangeListener {
     public List<String> puzzle;
     // private JButton SudokuWindow[][] = new JButton[9][9];
     SudokuField[][] tablicaGui = new SudokuField[9][9];
+    String[] linia = new String[9];
 
     
     public SudokuWindow(){ // konstuktor
-        this.readPuzzle();
-        this.createGui();
+        readPuzzle();
+        createGui();
+       // showList();
+        
+    }
+
+    public void showList(){ // do testowania
+        for(int i = 0; i < 9; i++){
+                System.out.print(puzzle.get(i));
+                System.out.print("\n");
+        }
     }
 
     public void readPuzzle(){
         try{
-            puzzle = Files.readAllLines(Paths.get("puzzle.txt"));
+            File file = new File("puzzle2.txt");
+            URI fileUri = file.toURI();
+            Path puzzlePath = Paths.get(fileUri);
+            puzzle = Files.readAllLines(puzzlePath);
         } catch (IOException e){
             e.printStackTrace();
         }
     }
 
     public void createGui(){
+        setTitle("Sudoku");
         setVisible(true);
         setSize(500,500);
         setLayout(new GridLayout(9,9));
-       
-        int zmiennaPomocniczaPoLisciePuzzle = 0;
+        for(int i = 0; i < 9; i++){ // wpisywanie linii do tablicy linii
+            linia[i] = puzzle.get(i);
+            System.out.print(linia[i]);
+        }
 
         for(int wiersz = 0; wiersz < 9; wiersz++){
             for(int kolumna = 0; kolumna < 9; kolumna++){
-                if(puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "0"){
-                    tablicaGui[wiersz][kolumna] = new VariableSudokuField(this); 
-                }else if(puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "1" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "2" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "3" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "4" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "5" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "6" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "7" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "8" || puzzle.get(zmiennaPomocniczaPoLisciePuzzle) == "9"){
-                    int puzzleInt = Integer.parseInt(puzzle.get(zmiennaPomocniczaPoLisciePuzzle));
-                    tablicaGui[wiersz][kolumna] = new FixedSudokuField(puzzleInt,this);
+                if( linia[wiersz].charAt(kolumna) == '0'){
+                    VariableSudokuField fieldV = new VariableSudokuField(this);
+                    tablicaGui[wiersz][kolumna] = fieldV; 
+                        add(fieldV.label);
+                }else if(linia[wiersz].charAt(kolumna) == '1' ||
+                    linia[wiersz].charAt(kolumna) == '2' ||
+                    linia[wiersz].charAt(kolumna) == '3' ||
+                    linia[wiersz].charAt(kolumna) == '4' ||
+                    linia[wiersz].charAt(kolumna) == '5' ||
+                    linia[wiersz].charAt(kolumna) == '6' ||
+                    linia[wiersz].charAt(kolumna) == '7' ||
+                    linia[wiersz].charAt(kolumna) == '8' ||
+                    linia[wiersz].charAt(kolumna) == '9'){
+                        int puzzleInt = linia[wiersz].charAt(kolumna) - 48;
+                        FixedSudokuField fieldF = new FixedSudokuField(puzzleInt,this);
+                        tablicaGui[wiersz][kolumna] = fieldF;
+                            add(fieldF.label);
                 }
-
-                zmiennaPomocniczaPoLisciePuzzle++;
+                System.out.print(linia[wiersz].charAt(kolumna)); 
             }
         }
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j <9; j++){
-                add(tablicaGui[i][j]);
-            }
-        }
-    }
+}
 
     @Override
     public void fieldsChanged(){ // metoda z interfejsu FieldValueChangeListener
