@@ -3,26 +3,17 @@ import java.lang.invoke.CallSite;
 import java.util.Arrays;
 import java.util.Random; // do generowania kolejnosci na starcie
 
-public class Connect4 implements Cloneable{
+public class Connect4 implements Cloneable, GameStateListener{
 	public int[][] planszaGry;
 	Tablice tablice = new Tablice();
+	public int iloscGraczyC4;
 
 	public Connect4() { // konstruktor 6x7
-		this.planszaGry = new int[6][7];
-			// for(int i = 0; i < 6; i++){
-			// 	for(int j = 0; j < 7; j++){
-			// 		//this.planszaGry[i][j] = 0;
-			// 	}
-			// }
+		this.planszaGry = new int[6][7];	
 	}
 	
 	public Connect4(int iloscWierszyPrzekazywana, int iloscKolumnPrzekazywana) { // konstruktor 2 parametrowy
 		this.planszaGry = new int[iloscWierszyPrzekazywana][iloscKolumnPrzekazywana];
-			// for(int i = 0; i < iloscWierszyPrzekazywana; i++){
-			// 	for(int j = 0; j < iloscKolumnPrzekazywana; j++){
-			// 		//this.planszaGry[i][j] = 0;
-			// 	}
-			// }
 	}
 
 	public void zerujTablice(){
@@ -255,8 +246,8 @@ public class Connect4 implements Cloneable{
 			}
 	}
 
-	public setGameListener(){
-		//
+	public void setGameStateListener(){
+		GameStateListener listener = this;
 	}
 
 	
