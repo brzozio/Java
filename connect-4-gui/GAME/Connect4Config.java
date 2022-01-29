@@ -73,8 +73,8 @@ public class Connect4Config extends JDialog{
             public void actionPerformed(ActionEvent e){
                 Connect4GUI c4gui = new Connect4GUI(wiersze,kolumny,iloscGraczy);
                     c4gui.setVisible(true);
-                this.setVisible(false);
-                this.dispose();
+                setVisible(false);
+                dispose();
             }
         }; 
         buttonGraj.addActionListener(graj);
@@ -92,17 +92,17 @@ public class Connect4Config extends JDialog{
     }
 
     public int getRows(){
-        rows = this.wiersze;
+        int rows = this.wiersze;
         return rows;
     }
 
     public int getCols(){
-        cols = this.kolumny;
+        int cols = this.kolumny;
         return cols;
     }
 
     public int getNumberOfPlayers(){
-        numberOfPlayers = this.iloscGraczy;
+        int numberOfPlayers = this.iloscGraczy;
         return numberOfPlayers;
     }
 }

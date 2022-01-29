@@ -1,0 +1,9 @@
+Java
+JVM
+Niezbędna do wykonania programu w Javie
+klasa
+Co najmniej jedna w każdym programie w języku Java
+private
+specyfikator dostępu dla pól dostępnych wyłącznie z danej klasy
+boolean
+jeden z ośmiu typów prostych
